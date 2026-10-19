@@ -1,0 +1,31 @@
+name: Testes da trilha
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  estilo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install ruff==0.17.1
+      - run: python -m ruff check .
+      - run: python -m ruff format --check .
+  testar:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ['3.11', '3.13']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python scripts/testar.py
+      - run: python scripts/verificar_documentacao.py
+      - run: python -m compileall -q 01-desperdicio-zero 02-buscacep 03-orcadev 04-fila-justa 05-radar-de-vagas scripts
+      - run: git diff --check
