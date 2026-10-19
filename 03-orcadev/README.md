@@ -1,98 +1,76 @@
-# 03 · OrçaDev 💼
+# 3. OrçaDev 💼
 
-**Intermediário · transforme uma lista de serviços em um orçamento consultável.**
+**Quanto custa esse serviço? Vamos montar a conta e deixar tudo organizado.**
 
-Freelancers precisam explicar o que será feito e quanto custará. O OrçaDev registra
-clientes, serviços e quantidades; calcula subtotal, desconto fixo opcional e total;
-salva múltiplas propostas em JSON e gera um documento TXT para cada uma.
+Imagine que você vai fazer dois serviços para alguém. Precisa anotar o que será
+feito, quanto custa cada parte e se vai dar desconto. O OrçaDev junta essas
+informações em um orçamento que você pode salvar e consultar depois.
+
+### [Começar: pensar em um orçamento simples →](passo-a-passo/01-entenda-o-problema.md)
+
+## Um exemplo do que vamos criar
 
 ```text
-ORÇAMENTO 0001
 Cliente: Cliente de demonstração
-Data: 2026-10-18
 
-SERVIÇOS
-Revisão de página | 2 x R$ 12,50 = R$ 25,00
-
-Subtotal: R$ 25,00
+Revisão de página: 2 unidades de R$ 12,50 = R$ 25,00
 Desconto: R$ 5,00
-TOTAL: R$ 20,00
+Total: R$ 20,00
 ```
 
-## Regras e aprendizado
+Você poderá cadastrar clientes, adicionar serviços, calcular os valores e guardar
+vários orçamentos. Também vamos gerar um arquivo de texto com a proposta.
+É um exercício de organização; não emite nota fiscal nem substitui um contrato.
 
-O cliente tem nome e ID; não pedimos CPF, endereço ou telefone. Cada orçamento
-pertence a um cliente existente e contém de 1 a 100 serviços. Quantidade é inteira
-de 1 a um milhão. Preço unitário é positivo, até um bilhão de reais e no máximo duas
-casas decimais. Digite `12,50` ou `12.50`, sem separador de milhar ou símbolo R$.
-Desconto é um valor fixo em reais, de zero ao subtotal; desconto percentual é desafio.
+## O que tem de novo?
 
-Todos os cálculos usam `Decimal`, criado de texto, nunca de `float`. Valores no
-JSON são strings decimais; isso mantém precisão na recuperação. Subtotais e totais
-são recalculados a partir dos serviços, evitando números derivados conflitantes.
+Vamos pensar em como as informações se conectam: cada orçamento pertence a um
+cliente e tem seus próprios serviços. E vamos cuidar dos centavos com uma
+ferramenta do Python chamada `Decimal`, explicada quando chegar a hora da conta.
 
-Conceitos: modelagem, funções, listas/dicionários, aritmética decimal, validação,
-regras de negócio, formatação e arquivos. Pré-requisitos: funções, persistência JSON
-e tratamento de erros dos dois projetos anteriores.
+Você não precisa ser freelancer para acompanhar. Use nomes genéricos e invente
+um serviço simples, como revisão de uma página. O importante é entender a conta.
 
-## Instalar e executar
+## Vamos por partes
 
-Python 3.11+, biblioteca padrão. Na raiz:
+1. [Entenda o pedido do cliente](passo-a-passo/01-entenda-o-problema.md)
+2. [Organize o que precisa guardar](passo-a-passo/02-planeje-a-solucao.md)
+3. [Monte o orçamento aos poucos](passo-a-passo/03-primeira-implementacao.md)
+4. [Resolva os problemas que aparecerem](passo-a-passo/04-evoluindo-o-projeto.md)
+5. [Adapte para uma ideia sua](passo-a-passo/05-finalizacao.md)
+
+[Precisa de uma dica?](dicas.md) · [Ideias para continuar](desafios.md)
+· [O que já consegui fazer?](checklist.md)
+
+<details><summary>Quero experimentar a versão pronta</summary>
+
+No terminal, na pasta principal dos cinco projetos:
 
 ```sh
-python 03-orcadev/codigo-inicial/main.py
 python 03-orcadev/solucao/main.py
-python 03-orcadev/solucao/main.py --dados 03-orcadev/dados/experimento.json
 ```
 
-Menu: 1 cadastra cliente; 2 monta e salva um orçamento; 3 lista propostas;
-4 consulta e exporta uma proposta pelo ID; 0 sai. Você pode criar vários clientes
-e propostas. Não é necessário cadastrar novamente o cliente a cada orçamento.
+Cadastre um cliente com a opção `1`. Depois escolha `2` para montar o orçamento.
+Digite preços como `12,50` ou `12.50`, sem `R$` e sem separador de milhar.
+A quantidade de cada serviço é inteira: 1, 2, 3... O desconto é um valor em reais,
+não uma porcentagem. Ele não pode ser maior que a soma dos serviços.
 
-## Estrutura e persistência
+Use `3` para listar as propostas, `4` para abrir e salvar novamente uma delas
+como texto, e `0` para sair.
 
-```text
-codigo-inicial/main.py, tarefas.py
-solucao/main.py
-solucao/orcadev/dominio.py       Decimal, clientes e orçamentos
-solucao/orcadev/arquivos.py      escrita por substituição
-solucao/orcadev/terminal.py      cadastro, consulta e TXT
-testes/test_orcadev.py
-passo-a-passo/                  cinco etapas
-```
+</details>
 
-Padrão: `03-orcadev/dados/orcamentos.json`. TXT em `03-orcadev/dados/orcamentos/`,
-com nomes como `orcamento-0001.txt`. Com `--dados`, TXT fica na subpasta `orcamentos`
-ao lado do JSON escolhido. A opção 4 regenera o TXT do orçamento salvo, substituindo
-sua exportação anterior; o JSON é a fonte oficial dos dados.
+<details><summary>Onde ficam meus orçamentos?</summary>
 
-Arquivo ausente inicia cadastro vazio. JSON inválido, IDs repetidos ou proposta
-sem cliente válido impedem abertura e preservam o original. Feche o programa e
-copie o arquivo antes de restaurar backup. Para reiniciar intencionalmente, mova
-o JSON e os TXT antigos para uma pasta de backup. Pastas de dados são ignoradas
-pelo Git. Não use duas instâncias gravando o mesmo arquivo.
+Os cadastros ficam em `dados/orcamentos.json`, dentro deste projeto. As propostas
+em texto ficam na pasta `dados/orcamentos`, com nomes como `orcamento-0001.txt`.
+Você pode abrir o TXT em um editor de texto.
 
-JSON e TXT são gravações separadas: se JSON foi salvo e TXT falhou, a proposta
-continua no histórico. O terminal informa isso; use opção 4 para tentar novamente.
-É uma ferramenta educacional, sem nota fiscal, assinatura ou validade jurídica
-garantida do documento.
+Se o cadastro for salvo, mas o TXT não puder ser criado, o programa avisa.
+Não precisa cadastrar tudo de novo: use a opção `4` para tentar gerar o texto.
+Faça backup com o programa fechado e guarde uma cópia antes de corrigir arquivos
+com problema. Use uma janela por vez e não publique dados reais de clientes.
 
-## Testes
+</details>
 
-```sh
-cd 03-orcadev
-python -m unittest discover -s testes -v
-```
-
-Cobrem centavos, descontos, serviços inválidos, cliente inexistente, múltiplas
-propostas, texto, recuperação e fluxo do menu. Nenhum dado de cliente real é usado.
-
-## Trilha
-
-1. [Problema](passo-a-passo/01-entenda-o-problema.md)
-2. [Planejamento](passo-a-passo/02-planeje-a-solucao.md)
-3. [Construção](passo-a-passo/03-primeira-implementacao.md)
-4. [Erros](passo-a-passo/04-evoluindo-o-projeto.md)
-5. [Autonomia](passo-a-passo/05-finalizacao.md)
-
-[Desafios](desafios.md) · [Dicas](dicas.md) · [Checklist](checklist.md) · [Voltar](../README.md)
+[Voltar ao início](../README.md) · [Como pedir ajuda](../COMO-CONTRIBUIR.md)

@@ -1,41 +1,40 @@
-# 2. Planeje a solução
+# 2. Uma consulta, quatro pequenas tarefas
 
-Desenhe quatro partes: normalização do CEP, transporte HTTP, interpretação da
-resposta e histórico. O menu apenas combina essas partes. Assim, um teste consegue
-validar um JSON sem tocar na rede.
+Vamos pensar no caminho de um CEP desde o teclado até aparecer na tela.
+Não precisamos resolver tudo na mesma função.
 
-Entrada: string como “01001-000”. Saída normalizada: “01001000”. Não converta CEP
-em inteiro: o zero inicial faz parte do identificador. Remover todos os caracteres
-não numéricos também pode esconder um erro como “abc01001000”. Nesta versão, aceitamos
-apenas oito dígitos, um hífen opcional na posição certa e espaços externos.
+## 1. Conferir o que foi digitado
 
-## Contrato das funções
+Vamos aceitar `01001000` e `01001-000`. Os dois representam o mesmo CEP.
+Depois de conferir o formato, guardaremos apenas os oito números como texto.
 
-Planeje `normalizar_cep(cep)`, `interpretar_resposta(dados)` e `consultar(cep)`.
-A primeira devolve texto validado; a segunda devolve um endereço com campos
-conhecidos; a terceira coordena rede e validação. Uma exceção significa que a
-operação não produziu um endereço válido.
+Por que texto? Porque `01001000` começa com zero. Transformar isso em um número
+inteiro faria esse zero desaparecer. CEP é uma identificação, não uma quantidade
+para somar.
 
-```text
-validar CEP localmente
-montar URL apenas com os oito dígitos
-abrir conexão com tempo limite
-ler corpo e converter JSON
-se erro do serviço: informar CEP não encontrado
-validar campos e correspondência do CEP
-mostrar endereço
-registrar e salvar histórico
-```
+## 2. Pedir o endereço
 
-O histórico será uma lista de consultas, cada uma com endereço e data/hora. Repetir
-o mesmo CEP gera outra consulta: estamos registrando ações, não mantendo um cadastro
-único de ruas. Documentar isso evita uma deduplicação acidental.
+A URL do pedido terá este formato:
 
-## Pense no teste antes da rede
+`https://viacep.com.br/ws/01001000/json/`
 
-Escreva um dicionário de referência com `cep`, `logradouro`, `bairro`, `localidade`
-e `uf`. Qual campo pode vir vazio? Um CEP geral de município pode não ter rua ou
-bairro; isso não torna o endereço automaticamente inválido. Já cidade ausente ou
-um array no lugar do dicionário são respostas inesperadas.
+Só o trecho do CEP muda. O programa montará esse endereço a partir do CEP
+conferido, sem pedir que a pessoa digite uma URL inteira.
 
-Prepare uma lista de exemplos e siga para [implementar por partes](03-primeira-implementacao.md).
+## 3. Ler e mostrar a resposta
+
+O serviço usa `localidade` para a cidade e `uf` para o estado.
+Nosso programa deve mostrar rótulos mais amigáveis, como “Cidade: São Paulo”.
+
+Alguns CEPs não têm rua ou bairro preenchidos. Campo vazio não significa
+automaticamente que a consulta falhou.
+
+## 4. Guardar o que deu certo
+
+Uma consulta válida vai para a lista do histórico. Depois, salvamos essa lista
+em JSON, como aprendemos antes. Uma falha de conexão não deve virar um endereço salvo.
+
+Anote um nome de função para cada tarefa. Isso ajuda a saber onde procurar
+quando uma parte não funcionar.
+
+[Anterior: a ideia](01-entenda-o-problema.md) · [Próximo: fazer a primeira consulta](03-primeira-implementacao.md)

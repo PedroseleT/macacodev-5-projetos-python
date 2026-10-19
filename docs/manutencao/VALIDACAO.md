@@ -1,4 +1,4 @@
-# Validação da primeira versão
+# Verificações técnicas da primeira versão
 
 Verificação local em 18/10/2026: Windows, Python 3.13.9. A matriz de CI não deve
 ser confundida com execução local: consulte o histórico do GitHub Actions para

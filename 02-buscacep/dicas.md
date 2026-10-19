@@ -1,18 +1,40 @@
-# Dicas progressivas
+# Uma ajuda para a consulta
 
-<details><summary>1 · CEP não é um número para calcular</summary>
-Você não vai somar dois CEPs. Guarde uma string para preservar o zero inicial.
-Liste os dois formatos aceitos antes de remover o hífen.
+Não precisa ler tudo. Abra a dúvida que apareceu na sua tentativa.
+
+<details><summary>Por que o zero do começo desapareceu?</summary>
+
+**Primeira pista:** CEP não é uma quantidade para fazer contas.
+
+**Mais uma:** deixe como texto. Transformar em inteiro tira o zero inicial.
+Você pode conferir os dígitos sem mudar o CEP para número.
+
 </details>
-<details><summary>2 · Como entender a resposta?</summary>
-Construa um dicionário local e teste seu parser sem HTTP. Verifique tipo, erro
-de CEP inexistente e campos exigidos. Não confunda rua vazia com cidade ausente.
+
+<details><summary>Não entendi como ler a resposta</summary>
+
+**Primeira pista:** veja o exemplo pequeno com `json.loads` na etapa de construção.
+
+**Mais uma:** depois da conversão, você terá um dicionário.
+`endereco["localidade"]` busca a cidade. Confira os nomes dos campos
+na resposta antes de escrever o acesso.
+
 </details>
-<details><summary>3 · Como testar sem rede?</summary>
-Substitua a função que abre a URL por uma função controlada. Ela pode devolver
-bytes de JSON ou lançar URLError. Só o transporte deve mudar; a validação continua.
+
+<details><summary>Rua vazia quer dizer que deu errado?</summary>
+
+Nem sempre. Há CEPs de uma cidade que não apontam para uma rua específica.
+Uma resposta com cidade e estado pode ser válida mesmo sem rua ou bairro.
+Já `{"erro": true}` significa que o CEP não foi encontrado.
+
 </details>
-<details><summary>Histórico e cache são a mesma coisa?</summary>
-Histórico registra consultas. Cache decide se pode evitar uma nova consulta.
-Comece com histórico; o prazo de cache é um desafio separado.
+
+<details><summary>O histórico precisa de internet?</summary>
+
+Não. O histórico lê o que você já salvou no computador.
+Só uma nova consulta precisa falar com o ViaCEP. Guarde os endereços
+que deram certo, não as mensagens de erro.
+
 </details>
+
+[Voltar à etapa de construção](passo-a-passo/03-primeira-implementacao.md)

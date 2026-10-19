@@ -1,33 +1,38 @@
-# 4. Aprenda com os erros
+# 4. A fila se embolou? Vamos acompanhar uma senha
 
-## A fila virou pilha
+Quando algo estranho acontecer, diminua o exemplo. Três senhas são mais fáceis
+de acompanhar do que trinta. Anote a ordem esperada e veja onde o programa saiu
+desse caminho.
 
-`pop()` sem índice remove o último elemento. Isso chama a chegada mais recente,
-comportamento LIFO de uma pilha. Observe uma lista de três senhas e compare `pop()`
-com `pop(0)`. Guarde FIFO e LIFO como comportamentos que você consegue demonstrar,
-não apenas siglas.
+## Quem chegou por último foi chamado primeiro
 
-## “IndexError: pop from empty list”
+Confira se você usou `pop()` sem indicar a posição. Assim, Python retira o
+último elemento. Para a primeira pessoa da lista, use `pop(0)`.
 
-A condição foi checada tarde demais. Faça a decisão antes de remover. Escreva
-um teste de fila vazia que confirme a mensagem e a preservação do estado. Não
-capture IndexError para fingir que a chamada deu certo.
+Experimente com uma lista pequena e observe a diferença. Não precisa decorar
+uma sigla para entender quem está saindo.
 
-## Depois de reiniciar, três prioritárias passam
+## Apareceu IndexError
 
-Você provavelmente salvou filas, mas esqueceu o contador. Compare o JSON salvo
-com todos os campos que a decisão usa. Uma regra distribuída em variáveis locais
-do menu desaparece quando o processo termina. Estado persistente precisa ser explícito.
+A mensagem `pop from empty list` diz que você tentou retirar um item de uma
+lista vazia. A solução é conferir se há senhas antes de remover.
 
-## A mesma senha aparece duas vezes
+Mostre “Não há senhas aguardando” e volte ao menu. Isso é uma situação normal
+de uso, não motivo para encerrar o programa.
 
-Uma transição pode ter copiado para o destino sem remover da origem, ou o arquivo
-foi editado. Verifique unicidade entre filas, ativa e histórico. O mesmo ID não
-pode ocupar dois estados. Crie um JSON de teste duplicado e confirme rejeição.
+## Depois de abrir de novo, a ordem mudou
 
-## Chamada não significa conclusão
+Talvez você tenha salvo as filas, mas esquecido o contador de prioritárias.
+Confira quais informações a escolha da próxima senha usa e se todas foram
+guardadas no arquivo.
 
-Se o total aumenta ao chamar, mas o usuário ainda está sendo atendido, a estatística
-está nomeada incorretamente. Use `concluidos`, `aguardando` e `em_atendimento` para
-expressar as coisas diferentes. Desenhe uma tabela com uma senha em cada estado
-e confira as contagens antes de [evoluir](05-finalizacao.md).
+## A mesma senha está em dois lugares
+
+Uma senha chamada deve sair da fila. Quando concluir, deve sair do atendimento
+e ir para o histórico. Colocar no destino sem tirar da origem duplica a senha.
+
+Use mensagens como `print(fila_comum)` e `print(em_atendimento)` antes e depois
+da chamada. Acompanhe a mesma senha pelo número e retire essas mensagens extras
+depois que descobrir o problema.
+
+[Anterior: construir](03-primeira-implementacao.md) · [Próximo: fazer sua versão](05-finalizacao.md)

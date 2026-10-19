@@ -1,35 +1,35 @@
-# 1. Entenda o problema
+# 1. O que vamos construir?
 
-Imagine que você comprou bananas, arroz e iogurte. Guardou cada coisa em um lugar
-e não lembra o que vence primeiro. O objetivo não é decidir se um alimento está
-próprio para consumo: é deixar as datas registradas para você se organizar.
+Você compra umas bananas, guarda na cozinha e esquece delas. Quando lembra, já
+passou da validade. Acontece! Nosso primeiro programa vai ajudar a organizar os
+alimentos para você saber o que precisa de atenção antes.
 
-Antes de escrever código, escolha três alimentos inventados. Para cada um, anote
-nome, quantidade e validade. Uma lista de nomes resolve o problema? Não: você não
-saberia quanto tem nem quando vence. Por isso cada registro terá vários campos.
+Não vamos começar pelo código. Primeiro, imagine como seria usar esse programa.
 
-O usuário precisará cadastrar, consultar e remover. O programa também separará
-vencidos de próximos do vencimento e recuperará os registros ao abrir novamente.
-“Salvar” é parte do comportamento: uma lista que desaparece ao sair não resolve
-o esquecimento de amanhã.
+## Uma conversa bem simples
 
-## Defina o que significa próximo
+Você escolhe cadastrar um alimento. O programa pergunta o nome, a quantidade e a
+validade. Depois, quando você quiser, mostra tudo que foi cadastrado.
 
-Escolher uma regra é trabalho de programação. Aqui, próximo significa de zero a
-três dias a partir de hoje, inclusive. Ontem é vencido; hoje é próximo; daqui a
-quatro dias está em dia. A regra é didática e pode virar um desafio configurável.
+Por exemplo: Banana, 6 unidades, validade em 20/10/2026. Mais tarde, você poderá
+remover esse alimento da lista porque já usou as bananas.
 
-Desenhe a linha do tempo para o dia 18/10/2026: 17 deve ser vencido; 18 e 21,
-próximos; 22, em dia. Esse desenho já é um plano de teste, antes de existir código.
+Além de guardar as informações, queremos separar o que já venceu do que está
+perto de vencer. Aqui, “perto” significa hoje ou até três dias depois de hoje.
+Essa é só uma regra do nosso exercício, não uma orientação sobre segurança alimentar.
 
-## Sua primeira tarefa
+## Antes de abrir o editor
 
-Descreva uma conversa de terminal em que alguém cadastra dois produtos, lista e
-remove apenas um. Inclua o que deveria acontecer com quantidade zero e com
-31/02/2026. Não aceite “o programa quebra” como resposta: defina uma mensagem e
-permita tentar de novo.
+Pegue papel ou o bloco de notas e escreva dois alimentos de exemplo. Inclua as
+três informações de cada um. Agora responda: se você guardasse só o nome,
+conseguiria saber qual vence primeiro?
 
-Você precisará de strings, números, condicionais, laços e funções. Se listas e
-dicionários ainda confundirem, represente no papel uma lista com dois registros.
-Explique a diferença entre o produto e a coleção inteira. Só então siga para
-[o planejamento](02-planeje-a-solucao.md).
+Pense também no dia seguinte: os alimentos precisam continuar lá depois que o
+programa fechar. Vamos aprender a salvar isso, mas só depois de conseguir cadastrar.
+
+Você não precisa dominar tudo agora. Vamos usar textos, números, escolhas com
+`if` e pequenas funções, explicando cada novidade quando ela aparecer.
+
+**Por enquanto, sua tarefa é só descrever essa conversa com suas palavras.**
+
+[Voltar à apresentação](../README.md) · [Próximo: organizar as ideias](02-planeje-a-solucao.md)

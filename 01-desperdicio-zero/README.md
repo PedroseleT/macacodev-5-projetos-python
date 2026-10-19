@@ -1,95 +1,80 @@
-# 01 · Desperdício Zero 🍌
+# 1. Desperdício Zero 🍌
 
-**Iniciante · um pequeno inventário para lembrar a validade dos alimentos.**
+**Sabe aquela banana que você comprou e só lembrou quando já estava passando?**
 
-Quem compra uma fruta e esquece na gaveta perde dinheiro e comida. Vamos registrar
-nome, quantidade e validade, para consultar o que precisa de atenção primeiro.
-Datas são um auxílio de organização, não uma avaliação de segurança alimentar.
+Neste primeiro projeto, vamos criar uma lista de alimentos no computador.
+Você vai anotar o nome, a quantidade e a validade, e o programa vai mostrar
+o que está perto de vencer. Uma ideia simples para começar a juntar o que aprendeu.
 
-## Demonstração
+### [Começar a primeira etapa: entender a ideia →](passo-a-passo/01-entenda-o-problema.md)
+
+Se ainda não preparou o computador, [passe aqui primeiro](../COMECE-AQUI.md).
+
+## Como vai ficar?
+
+Imagine cadastrar seis bananas com uma data de validade. Depois, ao pedir para
+ver a lista, aparece algo assim:
 
 ```text
-1 Cadastrar | 2 Listar | 3 Próximos | 4 Vencidos | 5 Remover | 0 Sair
-Escolha: 1
-Alimento: Banana
-Quantidade: 6
-Validade (DD/MM/AAAA): 20/10/2026
-Alteração salva.
-Escolha: 2
-1 | Banana | 6 | 2026-10-20 | proximo
+Banana | quantidade: 6 | validade: 20/10/2026
 ```
 
-O status depende do dia da execução: `proximo` inclui hoje e os próximos três dias;
-`vencido` significa antes de hoje. São regras de data, não orientação de consumo.
+Você também poderá ver só os alimentos que venceram ou os que vencem em breve,
+remover um item e fechar o programa. Quando abrir de novo, a lista continuará lá.
 
-## Funcionalidades e conceitos
+## O que você vai aprender pelo caminho
 
-Cadastro, listagem, próximos do vencimento, vencidos, remoção por ID e recuperação
-automática em JSON. Quantidades positivas de até um bilhão, inclusive fracionárias
-com vírgula ou ponto; nomes de até 120 caracteres. Datas reais em DD/MM/AAAA.
-O menu trata opções inválidas, IDs ausentes e falhas de gravação.
+A guardar informações, repetir uma ação, organizar uma lista e dividir o programa
+em funções: pequenos blocos que fazem uma tarefa. Mais adiante, vamos salvar
+as informações em um arquivo para elas não sumirem quando você sair.
 
-Você pratica variáveis, tipos, operadores, `if`, `while`, `for`, funções, listas,
-dicionários, `datetime`, arquivos e JSON. Precisa reconhecer funções e listas;
-o tutorial apresenta as ferramentas de datas e persistência.
+Conhecer um pouco de variáveis, `if` e repetição já ajuda. Você não precisa
+saber mexer com datas e arquivos antes: a explicação chega na hora de usar.
 
-## Instalar e executar
+## Siga as etapas nessa ordem
 
-Python 3.11+, sem instalação de dependências. A partir da raiz:
+1. [O que vamos criar e por quê](passo-a-passo/01-entenda-o-problema.md)
+2. [Separando a ideia em partes menores](passo-a-passo/02-planeje-a-solucao.md)
+3. [Hora de escrever, um pedaço de cada vez](passo-a-passo/03-primeira-implementacao.md)
+4. [Deu erro? Vamos entender](passo-a-passo/04-evoluindo-o-projeto.md)
+5. [Agora deixe o projeto com a sua cara](passo-a-passo/05-finalizacao.md)
+
+Cada página termina com um link para a próxima. Você não precisa voltar aqui
+para procurar por onde continuar.
+
+[Precisa de uma dica?](dicas.md) · [Ideias para continuar](desafios.md)
+· [O que já consegui fazer?](checklist.md)
+
+<details><summary>Quero experimentar o programa pronto</summary>
+
+No terminal, dentro da pasta principal que contém os cinco projetos:
 
 ```sh
-python 01-desperdicio-zero/codigo-inicial/main.py
 python 01-desperdicio-zero/solucao/main.py
-python 01-desperdicio-zero/solucao/main.py --dados 01-desperdicio-zero/dados/experimento.json
 ```
 
-`codigo-inicial` abre um menu com orientações; implemente as ações progressivamente.
-O esqueleto não importa a solução nem finge salvar registros.
+Escolha `1` para cadastrar, `2` para listar ou `0` para sair. Digite a validade
+como `20/10/2026`. O nome pode incluir uma unidade, como “Arroz (kg)”.
+Para este exercício, próximo do vencimento significa de hoje até três dias
+à frente. Uma data anterior a hoje aparece como vencida. O programa organiza
+datas; ele não avalia se um alimento está próprio para consumo.
 
-## Arquivos e dados
+Depois, volte à sua tentativa. A versão pronta é uma ajuda para comparar,
+não uma etapa que você precisa decorar.
 
-```text
-codigo-inicial/main.py, tarefas.py
-solucao/main.py
-solucao/desperdicio/dominio.py     regras e validação
-solucao/desperdicio/arquivos.py    leitura e escrita UTF-8
-solucao/desperdicio/terminal.py    menu e mensagens
-testes/test_desperdicio.py
-passo-a-passo/                    cinco etapas
-```
+</details>
 
-Sem `--dados`, os registros ficam em `01-desperdicio-zero/dados/alimentos.json`,
-independentemente do diretório de onde você executa o programa. Essa pasta é criada
-no primeiro salvamento. Antes disso, um arquivo ausente significa inventário vazio.
-O JSON contém versão, próximo ID e a lista de alimentos. IDs removidos não se repetem.
+<details><summary>Onde a minha lista fica salva?</summary>
 
-Carregamento valida estrutura, IDs, datas e quantidades. Se o arquivo estiver inválido,
-o programa encerra com código 1, preservando-o. Faça uma cópia, corrija com um editor
-ou restaure seu backup. Para zerar intencionalmente, feche o programa e mova/apague
-somente esse JSON. Nunca faça isso como primeira tentativa de resolver um erro.
+A versão pronta cria `dados/alimentos.json` dentro da pasta deste projeto.
+JSON é um jeito de escrever informações organizadas em um arquivo de texto.
+Não precisa editar esse arquivo para usar o programa.
 
-Cada alteração é escrita em temporário e substitui o destino após sucesso. Falha
-de gravação não confirma a mudança em memória. Não há suporte a gravação simultânea
-por várias instâncias. Faça backups por cópia com o programa fechado.
+Se quiser uma cópia de segurança, feche o programa e copie esse arquivo.
+Se aparecer um aviso de arquivo com problema, não apague a única cópia:
+guarde o original antes de tentar corrigir ou recuperar um backup.
+Use uma janela do programa por vez para não misturar gravações.
 
-## Testes
+</details>
 
-```sh
-cd 01-desperdicio-zero
-python -m unittest discover -s testes -v
-```
-
-Usam datas fixas e arquivos temporários; não modificam seu inventário. Cobrem limites
-de validade, ano bissexto, entradas inválidas, remoção, persistência e falha de escrita.
-Para testar sua tentativa, escreva casos semelhantes importando seu módulo; a suíte
-atual importa `solucao/desperdicio`.
-
-## Trilha e próximos passos
-
-1. [Entenda o problema](passo-a-passo/01-entenda-o-problema.md)
-2. [Planeje a solução](passo-a-passo/02-planeje-a-solucao.md)
-3. [Construa por etapas](passo-a-passo/03-primeira-implementacao.md)
-4. [Aprenda com os erros](passo-a-passo/04-evoluindo-o-projeto.md)
-5. [Evolua sozinho](passo-a-passo/05-finalizacao.md)
-
-[Desafios](desafios.md) · [Dicas progressivas](dicas.md) · [Checklist](checklist.md) · [Voltar](../README.md)
+[Voltar à página inicial](../README.md) · [Como pedir ajuda](../COMO-CONTRIBUIR.md)

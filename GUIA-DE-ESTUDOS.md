@@ -1,111 +1,71 @@
-# Estude para conseguir construir
+# Como estudar sem cair no copiar e colar
 
-## Ordem e critérios
+Abrir um projeto e não saber por onde começar acontece. A ideia desta trilha é
+te ajudar a dividir aquele “não sei fazer isso” em partes menores.
 
-Comece no Desperdício Zero: você recebe uma entrada, representa um registro e salva
-uma lista. No BuscaCEP, a entrada passa a vir também de um serviço externo. No
-OrçaDev, você aprende regras monetárias. Na Fila Justa, decisões mudam um estado ao
-longo de várias operações. No Radar, você combina tudo em um CRUD maior.
+Se você ainda não baixou os arquivos, comece em [Comece aqui](COMECE-AQUI.md).
+Depois siga os projetos de 1 a 5. Não precisa abrir a solução inteira para começar.
 
-Antes de cada projeto, tente explicar `if`, `while`, função, lista e dicionário.
-Antes do segundo, saiba abrir um arquivo e tratar `ValueError`. Antes do terceiro,
-entenda a diferença entre texto numérico e número. Antes do quarto, consiga
-acompanhar alterações em uma lista. Antes do quinto, consiga separar menu e regras.
+## Faça uma coisa de cada vez
 
-Você concluiu uma etapa quando consegue: executar um caso válido, rejeitar um
-inválido, explicar o motivo de uma decisão e modificar a regra sem copiar.
+Em vez de pensar “vou criar um gerenciador de alimentos”, comece com:
 
-## Organização sugerida, sem prazo obrigatório
+> Vou guardar o nome de uma banana e mostrar esse nome na tela.
 
-Use os intervalos de sessões da [tabela inicial](README.md) apenas como estimativa.
-Um ciclo possível por semana tem três encontros: planejar e tentar; depurar e
-testar; reconstruir e personalizar. Pode levar várias semanas em um único projeto.
-Avançar pela compreensão é mais útil do que cumprir um calendário.
+Funcionou? Agora guarde a quantidade. Depois, faça isso com dois alimentos.
+Salvar em arquivo vem mais adiante. Um programa maior é feito dessas partes
+pequenas funcionando juntas.
 
-Em uma sessão de 45–90 minutos:
+## Um jeito de organizar seu estudo
 
-1. Releia uma tarefa e escreva o comportamento esperado em duas frases.
-2. Faça um exemplo manual e escolha um caso inválido.
-3. Implemente uma parte por 20–40 minutos sem consultar a solução.
-4. Execute, compare com sua previsão e registre o que descobriu.
-5. Termine anotando a próxima tarefa pequena. Não deixe apenas “continuar projeto”.
+1. Leia só a etapa em que você está.
+2. Escreva, com suas palavras, o que quer fazer.
+3. Tente uma parte pequena e rode o programa para ver o que aconteceu.
+4. Se o resultado foi diferente do esperado, observe os valores e tente entender.
+5. Ao parar, anote a próxima ação: “mostrar a lista”, por exemplo.
 
-## Prática ativa
+Se ajudar, separe um momento para ler e tentar, outro para resolver o que travou
+e outro para fazer uma mudança sua. Não é um cronograma obrigatório.
+Alguns projetos vão levar poucas sessões, outros várias. Pode ir no seu ritmo.
 
-Antes de rodar, preveja a saída. Troque um valor e explique o que deveria mudar.
-Desenhe a lista antes e depois de remover um item. Escreva testes com exemplos
-diferentes dos tutoriais. Feche a solução e reconstrua uma função de memória,
-entendendo cada linha. Explique em voz alta por que seu `return` está naquela posição.
+## Travou? Abra uma dica, não dez arquivos
 
-## Quando travar
+Cada projeto tem um link para as dicas. Elas ficam fechadas em
+caixinhas por assunto: abra a que combina com sua dúvida e volte para sua tentativa.
+Se ainda não sair, leia mais uma pista. A intenção é dar um empurrão sem tirar sua
+chance de pensar.
 
-Reduza o problema: um cadastro que não funciona pode virar uma função que recebe
-um nome e devolve um dicionário. Use `print(type(valor), repr(valor))` para observar
-tipos e espaços. Leia o traceback de baixo para cima e encontre o primeiro arquivo
-seu citado. Não modifique cinco coisas ao mesmo tempo.
+Evite mudar várias coisas ao mesmo tempo. Coloque um `print` perto da parte que
+parece errada e veja o valor de uma variável. Às vezes o problema é só um texto
+onde você esperava um número, ou uma linha que ficou dentro do lugar errado.
 
-As dicas possuem três camadas: pergunta orientadora, estrutura sugerida e indicação
-de ferramenta. Abra uma camada, feche o arquivo e tente novamente. Depois de uma
-tentativa registrada, consulte apenas a função correspondente na solução. Se ainda
-precisar de ajuda, abra uma issue com passos, saída esperada e saída observada.
+## Quando olhar a versão pronta?
 
-## Como usar os testes
+Depois de tentar e conseguir dizer em qual parte travou. Você pode olhar só
+a função relacionada à sua dúvida; não precisa ler tudo.
 
-Os testes da referência importam o pacote de `solucao/`. Eles usam pastas temporárias
-e não devem tocar seus arquivos reais. Rodar esses testes não valida automaticamente
-seu código inicial: primeiro implemente funções equivalentes, depois mude o caminho
-de importação no seu fork ou crie seus próprios testes. Os tutoriais mostram casos
-de comportamento para começar sem reproduzir a arquitetura inteira.
+Compare as ideias, feche a referência e tente escrever de novo do seu jeito.
+Copiar uma linha sem entender pode fazer o programa funcionar agora, mas não
+ajuda muito na próxima vez que você encontrar o mesmo problema.
 
-## Tornando o projeto autoral
+## Como perceber que está entendendo
 
-Escolha uma necessidade sua: alimentos de uma república, propostas de revisão de
-textos ou candidaturas de estágio. Altere uma regra, acrescente testes e documente
-a decisão. Mude o nome e a interface com propósito, não apenas as cores ou palavras.
-Mostre uma execução e explique limitações no seu README. Credite a base MacacoDev.
+Você consegue explicar o que o programa faz? Mudar um detalhe sem apagar tudo?
+Entender por que uma entrada não foi aceita? Essas são boas pistas.
+Não precisa decorar todos os comandos ou acertar na primeira tentativa.
 
-Estudar a referência é aprender uma decisão. Copiar sem compreender não demonstra
-autonomia. Uma adaptação autoral tem escolhas que você consegue justificar, testes
-que você escreveu e mudanças que consegue explicar numa entrevista.
+Por enquanto, confira as coisas **usando o próprio programa**: cadastre, liste,
+mude um valor e veja o resultado. Aprender a escrever verificações automáticas
+pode ficar para depois; isso não é requisito para começar esta trilha.
 
-## Ferramentas da referência que podem ser novas
+## E para deixar o projeto com a sua cara?
 
-**Pacote e importação relativa.** Uma pasta com `__init__.py` reúne módulos num
-pacote. Em `terminal.py`, `from .dominio import cadastrar` procura o módulo vizinho
-dentro do mesmo pacote. Execute `solucao/main.py`, a entrada documentada, em vez
-de executar `terminal.py` sozinho. O arquivo de entrada conecta as partes.
+Pense em algo que faria diferença pra você. Talvez alimentos de uma república,
+orçamentos de um serviço que conhece ou uma maneira melhor de organizar vagas.
+Escolha uma mudança pequena, escreva o que ela deve fazer e tente construir.
 
-**`if __name__ == "__main__"`.** Esse bloco chama o programa quando o arquivo é
-executado diretamente. Ao importar uma função em um teste, o menu não deve abrir.
-`raise SystemExit(main())` entrega ao sistema o código retornado: zero indica
-encerramento normal; um indica falha de abertura dos dados.
+Nos desafios, há ideias fáceis, médias e maiores. Escolha uma que faça sentido
+para o seu momento. Quando tiver uma versão sua, o [guia de GitHub](COMO-USAR-GIT-E-GITHUB.md)
+explica como compartilhar. Você não precisa aprender essa parte antes de programar.
 
-**`pathlib` e `argparse`.** `Path` representa caminhos sem concatenar barras
-específicas de Windows ou Linux. `Path(__file__)` parte do arquivo do programa;
-por isso os dados padrão não mudam conforme a pasta do terminal. `argparse` lê
-opções como `--dados experimento.json` e produz a ajuda `--help`. Não é necessário
-reimplementar essas bibliotecas para aprender suas aplicações.
-
-**`deepcopy`.** Atribuir `novo = estado` não cria outro dicionário. Mesmo uma cópia
-simples mantém referências para listas e dicionários internos. A referência usa
-`deepcopy` para preparar um estado separado. Se a validação ou a gravação falhar,
-o estado anterior continua válido. Experimente uma lista de dois dicionários para
-ver a diferença; não memorize a ferramenta sem observar o problema.
-
-**`with` e escrita por substituição.** `with` fecha arquivo/conexão ao sair do bloco,
-mesmo se houver exceção. `arquivos.py` primeiro escreve um temporário no mesmo
-diretório, descarrega o buffer e fecha o arquivo; só depois substitui o destino.
-O bloco `finally` limpa o temporário. Isso reduz o risco de arquivo parcialmente
-gravado durante uma falha da aplicação; não substitui backups nem cria suporte
-a duas instâncias editando o mesmo JSON.
-
-**`unittest`, `assert` e mock.** Um teste chama uma função com entrada conhecida e
-compara a saída com `assertEqual`, ou espera uma exceção com `assertRaises`.
-`TemporaryDirectory` separa dados de teste dos seus dados reais. Um mock substitui
-somente uma dependência, como rede ou teclado, por um comportamento controlado.
-No BuscaCEP, a interpretação do endereço continua real; só o HTTP é simulado.
-
-**Expressões regulares.** `re.fullmatch` pergunta se a string inteira segue um
-padrão. No CEP, `[0-9]{5}-?[0-9]{3}` aceita cinco dígitos, um hífen opcional e três
-dígitos. Primeiro entenda e teste essas posições com strings; depois estude a
-notação. Não use padrões enormes onde condições simples forem mais claras.
+[Ir para o primeiro projeto](01-desperdicio-zero/README.md) · [Pedir ajuda](COMO-CONTRIBUIR.md)

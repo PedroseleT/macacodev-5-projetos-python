@@ -1,29 +1,36 @@
-# 1. Entenda o problema
+# 1. Quanto ficou esse serviço?
 
-Uma pessoa pede duas revisões de página e uma configuração de formulário. Você
-anota preços em mensagens diferentes, esquece um item e aplica desconto no total
-errado. Um orçamento reúne escopo, quantidades e valores de forma verificável.
+Imagine que alguém pediu duas alterações em uma página e mais um formulário.
+Você anotou um preço em uma mensagem, outro em um papel e agora precisa juntar
+tudo. Dá para se perder fácil.
 
-O programa não decide seu preço de mercado. Ele organiza os valores que você
-informar e apresenta a conta. Também não é um sistema fiscal: não emite nota,
-não calcula tributos e não garante validade contratual.
+O OrçaDev vai organizar essa conta. Você informa o cliente, os serviços, as
+quantidades e os preços. O programa calcula e prepara um orçamento em texto
+para consultar depois.
 
-## Faça a conta antes de programar
+## Primeiro faça a conta no papel
 
-Escreva dois serviços: 2 unidades a R$ 12,50 e 1 unidade a R$ 5,00. O subtotal é
-R$ 30,00. Com desconto fixo de R$ 4,00, o total é R$ 26,00. O que deveria acontecer
-se o desconto fosse R$ 40,00? Nesta versão, a operação é rejeitada; total negativo
-não é uma proposta válida.
+Pense neste exemplo:
 
-O resultado terá cadastro de cliente, montagem de serviços, desconto, consulta de
-propostas anteriores e TXT formatado. Cada proposta tem ID próprio, inclusive
-quando o mesmo cliente pede duas propostas no mesmo dia.
+- Duas revisões de página por R$ 12,50 cada: R$ 25,00.
+- Uma configuração de formulário por R$ 5,00: R$ 5,00.
+- Somando tudo: R$ 30,00.
+- Tirando R$ 4,00 de desconto: R$ 26,00.
 
-Você já conhece funções e JSON. Agora precisa entender **regra de negócio**: uma
-decisão do problema, como desconto não superar subtotal, que deve valer tanto no
-terminal quanto num teste automatizado. Se essa regra estiver só em `input`, uma
-chamada direta à função poderá produzir um orçamento inválido.
+Esse valor antes do desconto é chamado de **subtotal**. Não tem segredo:
+é apenas a soma dos serviços.
 
-Sua tarefa: descreva um orçamento válido, um sem cliente e um com quantidade
-negativa. Defina a mensagem esperada antes de escrever a primeira função. Depois
-vá para [modelar os dados](02-planeje-a-solucao.md).
+E se alguém informar R$ 40,00 de desconto? Nosso programa deve avisar que
+o desconto não pode ser maior que o subtotal, em vez de criar um total negativo.
+
+## O que fica para você decidir
+
+O programa não escolhe quanto cobrar. Ele só organiza os valores informados.
+Também não emite nota fiscal nem substitui um contrato de prestação de serviço.
+
+Antes de seguir, invente dois serviços simples e escreva um orçamento à mão.
+Use dados de demonstração, sem nomes ou informações de clientes reais.
+
+Vamos transformar essa conta em pequenas funções, uma de cada vez.
+
+[Voltar à apresentação](../README.md) · [Próximo: organizar os valores](02-planeje-a-solucao.md)

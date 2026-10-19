@@ -1,39 +1,42 @@
-# 3. Construa por etapas
+# 3. Vamos colocar a fila para andar
 
-## A · gere e liste
+Abra `codigo-inicial/main.py` para conhecer o menu e `codigo-inicial/tarefas.py`
+para começar suas funções. As opções ainda mostram orientações: você vai conectar
+cada uma ao que construir.
 
-Objetivo: acrescentar senhas sem sobrescrever anteriores. Conceitos: lista,
-dicionário e contador. Tarefa: gere C1, P2 e C3. Esperado: listas diferentes e
-números únicos. Teste categoria desconhecida e confirme que nada foi criado.
-Listar não pode remover itens: percorra com `for`, não com `pop`.
+Rode pela pasta principal da trilha:
 
-## B · chame somente uma
+```sh
+python 04-fila-justa/codigo-inicial/main.py
+```
 
-Objetivo: mover uma senha para `em_atendimento`. Conceitos: estado e condição.
-Tarefa: retire a primeira senha comum quando não há prioritária. Esperado: ela sai
-da lista e aparece como ativa. Uma segunda chamada antes da conclusão deve falhar
-sem alterar nenhuma lista. Teste também fila vazia.
+## Primeiro, gere e mostre senhas
 
-## C · aplique a política
+Comece só com a fila comum. Cada nova senha precisa de um número maior que
+o anterior. Use `append` para acrescentar ao fim da lista e `for` para mostrar
+quem está esperando.
 
-Objetivo: preservar prioridade sem esquecer comuns. Conceitos: contador e combinação
-de condições. Tarefa: implemente a sequência 2:1. Esperado: P2, P3, C1, P5, C4 para
-o exemplo do tutorial. Teste só comuns e só prioritárias. Depois faça uma comum
-chegar após duas prioritárias já atendidas e confira o turno seguinte.
+Depois acrescente a fila prioritária. O número não se repete entre categorias:
+podemos ter C1 e P2, mas não precisamos criar duas senhas com o mesmo número.
 
-## D · conclua e conte
+## Faça uma chamada simples
 
-Objetivo: distinguir chamada de conclusão. Tarefa: registre instante da chamada
-e da conclusão; acrescente ao histórico somente ao concluir. Esperado: uma senha
-ativa não entra no total de concluídos. Teste concluir sem atendimento e confirme
-mensagem explícita. Mostre contagens por categoria.
+Se só houver comuns, retire a primeira e guarde como senha em atendimento.
+Em uma lista, `pop(0)` retira o primeiro elemento. Antes disso, confira se
+existe alguém para chamar.
 
-## E · recupere o estado completo
+Acrescente a opção de concluir: ela leva a senha em atendimento para o histórico
+e deixa o balcão livre.
 
-Objetivo: manter a regra após fechar o terminal. Conceitos: JSON e validação.
-Tarefa: salve durante um atendimento, recarregue e conclua. Esperado: nenhuma senha
-se perde nem volta ao começo da fila. Teste também a recuperação após duas chamadas
-prioritárias. Dados corrompidos devem interromper abertura, não zerar o balcão.
+## Agora coloque a regra de prioridade
 
-Imprima cópias do estado durante testes manuais para observar as transições. Depois
-remova prints de depuração e siga para [investigar erros](04-evoluindo-o-projeto.md).
+Use um contador para lembrar quantas prioritárias foram chamadas seguidas.
+Quando chegar a duas e houver comum esperando, chame uma comum e zere o contador.
+
+Acompanhe o exemplo C1, P2, P3, C4, P5 no papel e no programa.
+
+Por último, salve as listas, o atendimento, o histórico e os contadores em JSON.
+Feche e abra no meio de um atendimento: a senha deve continuar ali, sem voltar
+para o fim da fila.
+
+[Anterior: organizar](02-planeje-a-solucao.md) · [Próximo: encontrar os enganos](04-evoluindo-o-projeto.md)

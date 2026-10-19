@@ -1,22 +1,44 @@
-# Desafios
+# Qual seria sua próxima melhoria?
 
-## Fácil · observações
-Descrição: incluir observações opcionais nas candidaturas. Objetivo: ampliar o modelo
-sem quebrar registros antigos. Requisitos: limite de tamanho, edição e campo vazio
-para registros antigos. Conclusão: carregar JSON antigo continua funcionando e
-editar observação preserva demais campos. Dicas: comece pelo valor padrão; teste
-ausência da chave; documente mudança de formato se necessário.
+Agora você pode escolher uma necessidade e transformar em uma funcionalidade
+sua. Comece pela ideia que conseguir explicar com mais clareza.
 
-## Médio · filtro por período
-Descrição: consultar candidaturas entre duas datas. Objetivo: comparar datas.
-Requisitos: intervalo inclusivo, rejeitar início posterior ao fim e tratar Interesse
-sem data. Conclusão: testes cobrem ambas as bordas e intervalo sem resultados.
-Dicas: converta entradas antes de filtrar; defina o comportamento de data ausente.
+## Para começar: campo de observações
 
-## Avançado · candidaturas sem atualização
-Descrição: destacar registros sem mudança há determinado número de dias.
-Objetivo: analisar estado temporal sem inventar eventos. Requisitos: relógio
-substituível nos testes, prazo válido e política para estados finais. Conclusão:
-um registro recente não aparece e um antigo aparece no limite definido. Dicas:
-use atualizada_em; não confunda data da candidatura com última alteração; documente
-que ausência de atualização não significa rejeição da empresa.
+Acrescente uma anotação opcional, como “lembrar de revisar o currículo”.
+Deixe editar e defina um tamanho máximo para o texto.
+
+**Está pronto quando:** registros antigos abrem com a observação vazia e editar
+a anotação não muda empresa, cargo ou link.
+
+<details><summary>Uma pista</summary>
+Pense primeiro no valor usado quando a informação não existe.
+Depois acrescente o campo ao cadastro, à edição e à apresentação.
+</details>
+
+## Um passo além: procurar por período
+
+Mostre candidaturas enviadas entre duas datas, incluindo os dias escolhidos.
+
+**Está pronto quando:** datas inicial e final entram na busca, começo posterior
+ao fim recebe uma mensagem e você explica o que acontece com Interesse sem data.
+
+<details><summary>Uma pista</summary>
+Transforme os textos em datas antes de comparar. Confira o período antes
+de percorrer as fichas. Uma busca sem resultados não deve alterar os registros.
+</details>
+
+## Um desafio maior: oportunidades sem atualização
+
+Mostre fichas que estão há vários dias sem mudança. Deixe escolher esse prazo
+e explique se oportunidades aprovadas ou rejeitadas entram na lista.
+
+**Está pronto quando:** a data da última mudança decide o alerta, fichas recentes
+ficam de fora e o programa não chama uma empresa de “rejeitada” sem você informar isso.
+
+<details><summary>Uma pista</summary>
+Use a data de atualização, não a data da candidatura. Compare a diferença
+com o prazo escolhido e cuide do caso exatamente no limite.
+</details>
+
+[Voltar à última etapa](passo-a-passo/05-finalizacao.md)

@@ -1,11 +1,18 @@
-# Checklist de compreensão
+# Uma pausa para ver o que você já aprendeu
 
-- [ ] Consigo explicar entrada, registro e coleção.
-- [ ] Cadastro e removo por ID sem reutilizar IDs.
-- [ ] Quantidade zero, negativa e não numérica não quebram o menu.
-- [ ] Distingo ontem, hoje, +3 e +4 dias com testes fixos.
-- [ ] Saio e abro novamente sem perder registros.
-- [ ] Arquivo inválido não é sobrescrito silenciosamente.
-- [ ] Executei os testes e compreendi pelo menos um deles.
-- [ ] Fiz uma mudança sem copiar a solução inteira.
-- [ ] Meu README registra regras, execução e créditos.
+Não é prova nem precisa marcar tudo hoje. Use para perceber onde vale voltar.
+
+- [ ] Consigo explicar para que o programa serve.
+- [ ] Cadastro dois alimentos e os dois aparecem na lista.
+- [ ] Uma quantidade vazia, zero ou negativa recebe uma mensagem.
+- [ ] Entendo a diferença entre vencido e perto de vencer.
+- [ ] Removo o alimento escolhido sem mexer nos outros.
+- [ ] Fecho e abro o programa sem perder os alimentos.
+- [ ] Sei onde fica o arquivo salvo e faço uma cópia antes de mexer nele.
+- [ ] Consigo explicar uma função com minhas palavras.
+- [ ] Tentei uma pequena mudança sem copiar a solução inteira.
+
+Se uma caixinha ficou em branco, volte só à parte correspondente. Construir
+aos poucos continua valendo aqui.
+
+[Voltar ao projeto](README.md) · [Conhecer o BuscaCEP](../02-buscacep/README.md)

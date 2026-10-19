@@ -1,41 +1,44 @@
-# 3. Construa por etapas
+# 3. Junte as peças, uma de cada vez
 
-## A · cadastre e liste
+Abra `codigo-inicial/main.py` para conhecer o menu e `codigo-inicial/tarefas.py`
+para começar suas funções. Rode a partir da pasta principal da trilha:
 
-Objetivo: realizar Create e Read do CRUD. Conceitos: dicionários, listas e funções.
-Tarefa: crie duas oportunidades com IDs diferentes, inclusive da mesma empresa.
-Esperado: listar mostra ambas, com todos os campos principais. Teste empresa vazia,
-link sem protocolo e data impossível. Não acesse links durante validação: estamos
-checando formato, não disponibilidade da vaga.
+```sh
+python 05-radar-de-vagas/codigo-inicial/main.py
+```
 
-## B · filtre e pesquise
+O menu mostra as tarefas previstas, não um gerenciador pronto. Vamos dar vida
+às opções aos poucos.
 
-Objetivo: consultar subconjuntos. Conceitos: laços e comparações de strings.
-Tarefa: filtre status e procure parte do nome sem distinguir maiúsculas.
-Esperado: “BANANA” encontra “Banana Sistemas”; uma busca sem combinação devolve
-lista vazia. Confira que a lista original continua com todos os registros.
+## Cadastre e mostre
 
-## C · atualize com consistência
+Crie uma ficha com empresa, cargo, link, data e status. Confira se os campos
+obrigatórios estão preenchidos. Use um endereço de exemplo, como
+`https://example.org/vaga`. Verificar o formato do link não exige abrir o site.
 
-Objetivo: realizar Update. Conceitos: cópia, campos permitidos e invariantes.
-Tarefa: atualize cargo e status por ID. Esperado: ID e criação permanecem iguais;
-campos não enviados continuam preenchidos. Passe cargo válido e status inválido
-na mesma operação: nada deve mudar. Para avançar de Interesse sem data, solicite
-a data junto com a mudança de status.
+Cadastre duas vagas da mesma empresa e mostre os IDs diferentes na listagem.
 
-## D · exclua com confirmação
+## Acrescente pesquisa e filtro
 
-Objetivo: realizar Delete sem atingir outra oportunidade. Tarefa: mostre o registro
-e confirme antes de excluir. Esperado: responder algo diferente de SIM cancela;
-ID inexistente informa erro. Cadastre outro depois de excluir e confirme que a
-numeração não foi reutilizada.
+Pesquise por parte do nome, sem diferenciar maiúsculas de minúsculas.
+Depois faça o filtro por status. Crie uma nova lista para o resultado:
+a lista completa precisa continuar guardada.
 
-## E · conte, salve e exporte
+## Altere e exclua com cuidado
 
-Objetivo: combinar persistência e apresentação. Conceitos: JSON, CSV, agregação.
-Tarefa: conte por status e exporte campos para CSV com `csv.DictWriter`. Esperado:
-a soma dos status é o total; uma lista vazia gera cabeçalho sem erro. Teste um nome
-com vírgula e acento usando `csv.DictReader` para ler o resultado.
+Use o ID para escolher a vaga. Ao editar o cargo, mantenha os outros campos.
+Ao mudar de Interesse para uma etapa de candidatura, peça a data se faltar.
 
-Saia e abra o JSON novamente antes de afirmar que concluiu. Depois vá para
-[os erros frequentes](04-evoluindo-o-projeto.md).
+Antes de excluir, mostre qual registro será removido e peça confirmação.
+Se a pessoa cancelar, nada deve mudar.
+
+## Guarde e conte
+
+Salve em JSON após mudanças e carregue ao abrir. Para as estatísticas, comece
+contando quantas fichas estão em cada status.
+
+Por último, use o módulo `csv` para exportar uma tabela. Ele lida com nomes
+que tenham vírgulas e aspas. Abra a tabela e compare com a listagem antes
+de considerar essa parte pronta.
+
+[Anterior: organizar](02-planeje-a-solucao.md) · [Próximo: resolver os tropeços](04-evoluindo-o-projeto.md)

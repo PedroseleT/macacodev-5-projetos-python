@@ -1,18 +1,39 @@
-# Dicas progressivas
+# A conta travou? Aqui vão algumas pistas
 
-<details><summary>1 · Por onde começo a conta?</summary>
-Calcule um serviço manualmente: quantidade vezes preço. Some dois subtotais.
-Deixe o desconto para depois de testar essa soma.
+Escolha só a parte que está tentando construir agora.
+
+<details><summary>Por onde começo a soma?</summary>
+
+**Primeira pista:** calcule um serviço: quantidade vezes preço.
+
+**Mais uma:** depois faça isso para cada serviço e some os resultados.
+Deixe o desconto para quando essa soma já estiver aparecendo corretamente.
+
 </details>
-<details><summary>2 · Decimal e JSON parecem incompatíveis</summary>
-Cada camada pode ter uma representação: texto no disco e Decimal na conta.
-Reconstrua o tipo a partir da string, não de float.
+
+<details><summary>Não entendi as aspas no Decimal</summary>
+
+Use `Decimal("12.50")`: as aspas entregam o valor como texto, sem passar
+antes pela aproximação de um `float`. A ferramenta transforma esse texto
+no número que vamos usar na conta.
+
 </details>
-<details><summary>3 · Como gerar o TXT sem misturar tudo?</summary>
-Uma função devolve a string inteira. Outra grava. Assim você compara o texto em
-teste sem depender de arquivo nem de menu.
+
+<details><summary>Como guardo o preço no JSON?</summary>
+
+**Primeira pista:** JSON não precisa guardar todos os tipos que Python conhece.
+
+**Mais uma:** salve `"12.50"` como texto e transforme em `Decimal` de novo
+quando for calcular. Não transforme em `float` só para conseguir salvar.
+
 </details>
-<details><summary>Cliente e orçamento</summary>
-O orçamento carrega o ID do cliente. Localize esse ID antes de criar a proposta.
-Uma posição da lista não é uma identidade estável.
+
+<details><summary>Não sei como criar o arquivo do orçamento</summary>
+
+Primeiro monte uma lista de linhas: título, cliente, serviços, subtotal,
+desconto e total. Junte com `"\n".join(linhas)` e mostre na tela.
+Quando gostar do resultado, grave esse texto em um arquivo.
+
 </details>
+
+[Voltar à etapa de construção](passo-a-passo/03-primeira-implementacao.md)

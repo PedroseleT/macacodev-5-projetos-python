@@ -1,36 +1,40 @@
-# 2. Planeje a solução
+# 2. Cada senha no seu lugar
 
-Use duas listas, uma por categoria. `append` coloca no fim; `pop(0)` retira o
-primeiro item, preservando FIFO. Essa solução é compreensível para filas pequenas.
-Estruturas como `deque` podem melhorar remoção no início; não precisamos introduzi-las
-antes de entender o algoritmo.
+Para acompanhar a fila, vamos usar duas listas: uma para senhas comuns e outra
+para prioritárias. Quem chega entra no fim da sua lista. Quem é chamado sai
+do começo.
 
-O estado também precisa de `em_atendimento`, `historico`, `proximo_numero` e
-`prioritarios_seguidos`. Se salvar somente as listas, você esquecerá a pessoa que
-já saiu da fila mas ainda não terminou.
+Pense em duas filas desenhadas no papel. Você não precisa misturar tudo e tentar
+descobrir depois quem tem preferência.
 
-## Transformações do estado
+## Não basta guardar quem espera
 
-```text
-gerar: criar senha e acrescentar à categoria
-chamar: escolher categoria e mover a primeira para atendimento ativo
-concluir: mover a ativa para histórico e deixar atendimento vazio
-```
+Precisamos lembrar também de quem está sendo atendido. Essa senha já saiu da
+fila, mas ainda não entrou no histórico de atendimentos concluídos.
 
-Planeje `gerar_senha`, `chamar_proxima`, `concluir` e `estatisticas`. Elas recebem
-estado e devolvem novo estado ou resultado. O terminal faz input/print; o módulo
-de arquivos salva. Uma falha não pode remover uma senha parcialmente.
+Nossa organização terá:
 
-## Como decidir a categoria
+- As duas listas de espera.
+- A senha em atendimento, se houver uma.
+- A lista de atendimentos terminados.
+- O próximo número de senha.
+- Quantas prioritárias já foram chamadas seguidas.
 
-1. Se existe atendimento ativo, rejeite nova chamada.
-2. Se ambas as listas estão vazias, informe fila vazia.
-3. Prefira prioritária se existe e o limite de duas não foi atingido, ou se não há comum.
-4. Caso contrário, retire a primeira comum e zere o contador de prioritárias.
+Esse último contador ajuda a saber quando chegou a vez de uma senha comum.
 
-Limite o contador a dois: uma sequência longa de prioritárias sozinhas não precisa
-guardar um número enorme. Quando uma comum chegar, a informação “limite atingido”
-já basta para decidir o turno.
+## Pequenas funções
 
-Desenhe três operações seguidas e liste quais campos mudam em cada uma. Se conseguir
-simular uma reinicialização entre chamadas, siga para [construção](03-primeira-implementacao.md).
+Uma função gera a senha. Outra escolhe quem será chamado. Outra conclui o
+atendimento. O menu só pergunta o que a pessoa quer fazer e mostra o resultado.
+
+Ao chamar, primeiro confira se já existe alguém sendo atendido. Se existir,
+peça para concluir antes de chamar outro. Se as duas filas estiverem vazias,
+mostre uma mensagem em vez de tentar retirar alguém.
+
+Na hora de salvar em JSON, guarde todas essas informações, não só as listas.
+Se o programa fechar no meio de um atendimento, precisamos lembrar onde parou.
+
+Desenhe o caminho de uma senha: espera, atendimento e histórico. Agora estamos
+prontos para transformar esse desenho em código.
+
+[Anterior: a ideia](01-entenda-o-problema.md) · [Próximo: montar o balcão](03-primeira-implementacao.md)

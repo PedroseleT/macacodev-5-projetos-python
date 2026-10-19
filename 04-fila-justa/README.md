@@ -1,91 +1,75 @@
-# 04 · Fila Justa 🎟️
+# 4. Fila Justa 🎟️
 
-**Intermediário · organize senhas, chamadas e atendimentos concluídos.**
+**Quem é o próximo? Vamos organizar um pequeno atendimento.**
 
-Um pequeno balcão precisa saber quem aguarda, quem foi chamado e quem já terminou.
-O aplicativo gera senhas comuns/prioritárias, lista filas, chama a próxima,
-registra conclusão e consulta histórico/contagens após reiniciar.
+Neste projeto, a pessoa pega uma senha, espera ser chamada e depois termina
+o atendimento. Parece simples, mas o programa precisa lembrar quem está em
+cada situação, inclusive quando você fecha e abre de novo.
 
-## Política didática, sem certificação legal
+### [Começar: conhecer a fila que vamos organizar →](passo-a-passo/01-entenda-o-problema.md)
 
-Quando ambas as categorias aguardam, chamamos **até duas prioritárias e depois uma
-comum**. Dentro de cada categoria, respeitamos FIFO: a primeira chegada sai primeiro.
-Se apenas uma categoria aguarda, ela continua sendo atendida. A contagem de
-prioritárias consecutivas fica limitada a dois e volta a zero após uma comum.
-Se uma comum chegar depois de duas prioritárias, terá o próximo turno.
+## Como vai funcionar?
 
-Há um único atendimento ativo. É preciso concluí-lo antes da próxima chamada.
-Não há cancelamento automático, avaliação de elegibilidade ou múltiplos guichês.
-Esta política serve para estudar algoritmos; não é uma implementação completa
-das exigências legais de atendimento prioritário.
+Teremos senhas comuns e prioritárias. Dentro de cada grupo, quem chegou
+primeiro será chamado primeiro.
+
+Para o exercício, quando houver pessoas nos dois grupos, a ordem será:
 
 ```text
-Geradas nesta ordem: C0001, P0002, P0003, C0004, P0005
-Chamadas: P0002, P0003, C0001, P0005, C0004
+Uma prioritária → outra prioritária → uma comum → repetir
 ```
 
-O número é global e nunca reinicia entre categorias. `P`/`C` indica categoria;
-não confunda o número da senha com sua posição atual na fila.
+Se só houver gente em um dos grupos, o atendimento continua com esse grupo.
+Essa é uma regra escolhida para estudar programação, não uma garantia de que
+o sistema atende todas as exigências legais de um estabelecimento.
 
-## Executar e testar
+## O que você vai construir
 
-Python 3.11+, sem dependências. Na raiz:
+Um menu para gerar senhas, ver quem aguarda, chamar a próxima pessoa e terminar
+um atendimento. Também poderá olhar o histórico e contar quantos terminaram.
+Não vamos pedir nomes: os números das senhas já resolvem o exercício.
+
+Você vai praticar listas, decisões com `if` e a ideia de guardar o que mudou
+depois de cada ação. Não precisa conhecer estruturas complicadas para começar.
+
+## Seu caminho
+
+1. [Imagine o atendimento](passo-a-passo/01-entenda-o-problema.md)
+2. [Separe quem espera, quem está sendo atendido e quem terminou](passo-a-passo/02-planeje-a-solucao.md)
+3. [Construa uma ação de cada vez](passo-a-passo/03-primeira-implementacao.md)
+4. [Descubra por que a fila saiu da ordem](passo-a-passo/04-evoluindo-o-projeto.md)
+5. [Crie uma melhoria sua](passo-a-passo/05-finalizacao.md)
+
+[Precisa de uma dica?](dicas.md) · [Ideias para continuar](desafios.md)
+· [O que já consegui fazer?](checklist.md)
+
+<details><summary>Quero experimentar o atendimento pronto</summary>
+
+No terminal, na pasta principal dos cinco projetos:
 
 ```sh
-python 04-fila-justa/codigo-inicial/main.py
 python 04-fila-justa/solucao/main.py
-python 04-fila-justa/solucao/main.py --dados 04-fila-justa/dados/experimento.json
 ```
 
-Menu: 1 comum, 2 prioritária, 3 fila, 4 chamar, 5 concluir, 6 histórico,
-7 estatísticas e 0 sair. Histórico mostra atendimentos concluídos e informa a
-chamada ativa, se existir. Estatísticas separam concluídos de aguardando/ativo.
+Escolha `1` para senha comum, `2` para prioritária, `3` para ver a fila,
+`4` para chamar e `5` para concluir o atendimento. A opção `6` mostra o histórico,
+`7` mostra as contagens e `0` sai. Conclua o atendimento atual antes de chamar outro.
 
-```sh
-cd 04-fila-justa
-python -m unittest discover -s testes -v
-```
+As senhas têm letras e números, como `C0001` e `P0002`. O número é único,
+mesmo entre grupos diferentes. Ele não é a posição atual da pessoa na fila.
 
-Testes verificam FIFO, intercalação, fila vazia, categoria única, chegada de comum
-após duas prioritárias, duplicatas, histórico e recuperação no meio de atendimento.
+</details>
 
-## Conceitos e estrutura
+<details><summary>Se eu fechar o programa, perco a fila?</summary>
 
-Listas como filas, condicionais, estados, cópias, funções, regras de negócio e JSON.
-Pré-requisitos: listas, funções e persistência; não é necessário conhecer classes.
+A versão pronta salva em `dados/fila.json`, dentro deste projeto. Ela guarda
+as duas filas, o atendimento atual e o histórico. Ao abrir de novo, continua
+de onde estava. O arquivo é criado na primeira alteração.
 
-```text
-codigo-inicial/main.py, tarefas.py
-solucao/main.py
-solucao/filajusta/dominio.py      política, transições e validação
-solucao/filajusta/arquivos.py     arquivos UTF-8
-solucao/filajusta/terminal.py     interface
-testes/test_filajusta.py
-passo-a-passo/                   cinco tutoriais
-```
+Feche o programa antes de copiar o arquivo para um backup. Se houver um problema
+na leitura, ele avisa sem apagar o original. Não apague o arquivo para tentar
+resolver um erro sem antes guardar uma cópia. Use uma janela por vez.
 
-## Dados e recuperação
+</details>
 
-Padrão: `04-fila-justa/dados/fila.json`, independente do diretório atual. O arquivo
-nasce na primeira alteração. Salva filas, próximo número, histórico, turno de
-prioridade e atendimento ativo. Datas usam ISO com fuso UTC. Não pedimos nomes de
-pessoas: a senha numérica basta para o exercício.
-
-Ausência do arquivo inicia fila vazia. JSON inválido, senha duplicada ou contador
-incompatível impede abertura sem apagar o original. Feche o programa, copie o JSON
-e restaure backup/corrija o problema. Para zerar intencionalmente, mova o arquivo;
-isso reinicia numeração e histórico, portanto não faça durante uso real.
-
-Gravação por temporário preserva o destino se falhar; a interface só confirma
-após salvar. Apenas uma instância por arquivo. A solução com listas é adequada a
-filas pequenas para estudo, não a milhares de atendimentos simultâneos.
-
-## Trilha
-
-1. [Entenda](passo-a-passo/01-entenda-o-problema.md)
-2. [Planeje](passo-a-passo/02-planeje-a-solucao.md)
-3. [Construa](passo-a-passo/03-primeira-implementacao.md)
-4. [Depure](passo-a-passo/04-evoluindo-o-projeto.md)
-5. [Evolua](passo-a-passo/05-finalizacao.md)
-
-[Desafios](desafios.md) · [Dicas](dicas.md) · [Checklist](checklist.md) · [Voltar](../README.md)
+[Voltar ao início](../README.md) · [Como pedir ajuda](../COMO-CONTRIBUIR.md)

@@ -1,40 +1,39 @@
-# 2. Planeje a solução
+# 2. Uma vaga é uma ficha, não uma pilha de textos
 
-Entradas: campos da vaga, ID, status, termo de pesquisa e confirmação. Saídas:
-registros, contagens, JSON e CSV. Separe consulta de alteração: pesquisar não deve
-salvar nem mudar o registro por acidente.
+Vamos guardar cada oportunidade em um dicionário. Ele terá os campos da vaga
+e um ID, o número usado para encontrar aquela ficha sem confundir com outra.
 
-Um dicionário representa uma candidatura. Uma lista mantém as candidaturas, com
-`proximo_id` fora dos registros. Acrescente `criada_em` e `atualizada_em`: são
-instantes do cadastro, diferentes da data de candidatura informada pelo usuário.
+Uma lista reunirá todas as fichas. Pesquisar uma empresa deve mostrar as
+combinações encontradas, sem apagar as outras oportunidades da lista principal.
 
-## Contratos das operações
+## Separe as tarefas
 
-- `cadastrar`: valida campos e devolve estado com novo registro.
-- `localizar`: encontra exatamente um ID ou informa que não existe.
-- `atualizar`: recebe apenas campos editáveis e valida o resultado completo.
-- `excluir`: remove apenas o ID escolhido, sem renumerar.
-- `filtrar` e `pesquisar`: devolvem resultados sem alterar o estado.
-- `estatisticas`: conta por status, inclusive zeros.
+Pense nestas funções:
 
-```text
-carregar e validar JSON
-repetir menu
-    se consulta: mostrar resultado
-    se alteração: construir novo estado, validar, salvar e confirmar
-    se exportação: produzir CSV sem modificar JSON
-```
+- Cadastrar: conferir os dados e acrescentar uma ficha.
+- Listar: mostrar as fichas.
+- Pesquisar: procurar parte do nome de uma empresa.
+- Filtrar: mostrar só um status escolhido.
+- Atualizar: mudar os campos de uma ficha existente.
+- Excluir: remover apenas a ficha escolhida.
+- Contar: informar quantas vagas existem em cada status.
 
-Decida atualização parcial: campos ausentes ficam como estavam; campos enviados
-vazios passam pela validação. Apagar data não pode deixar uma candidatura em
-Entrevista sem data. Um erro em um campo impede a alteração inteira.
+Às vezes você verá as quatro ações de cadastro, leitura, alteração
+e exclusão resumidas como **CRUD**. Por enquanto, basta entender o que cada ação
+faz. Não precisa decorar a sigla.
 
-## CSV não é juntar com vírgulas
+## Editar não é cadastrar de novo
 
-Uma empresa pode se chamar `Empresa, Demonstração`. Se você montar texto manual,
-essa vírgula vira coluna extra. Use a biblioteca `csv`, que trata delimitadores e
-aspas. Nomes iniciados por sinais de fórmula também exigem cuidado ao abrir numa
-planilha; a exportação protege esses campos sem alterar o cadastro.
+Se mudar só o cargo, a empresa e o link devem continuar iguais. Comece pela
+ficha existente, confira os novos valores e só então guarde a alteração.
 
-Desenhe um JSON e um CSV de dois registros. Depois siga para
-[a construção incremental](03-primeira-implementacao.md).
+A data de cadastro e a data de candidatura também são coisas diferentes:
+uma registra quando você criou a ficha; a outra, quando enviou a candidatura.
+
+Vamos salvar tudo em JSON para reabrir depois. O CSV será uma cópia em formato
+de tabela para usar em planilhas. Ele não substitui o arquivo principal.
+
+Desenhe uma ficha completa antes de continuar. Isso ajuda a enxergar o que
+cada função precisa receber.
+
+[Anterior: a ideia](01-entenda-o-problema.md) · [Próximo: construir por partes](03-primeira-implementacao.md)

@@ -1,35 +1,39 @@
-# 4. Aprenda com os erros
+# 4. Minha conta ficou estranha. E agora?
 
-## O total tem casas inesperadas
+Com dinheiro, uma tela bonita não resolve se a conta estiver errada. Vamos olhar
+algumas situações que podem aparecer enquanto você constrói.
 
-Observe `print(type(preco), repr(preco))`. Se for float, a aproximação entrou antes
-do Decimal. Construa a partir de string. Quantizar para centavos define escala e
-arredondamento; nesta versão, entradas com frações de centavo são rejeitadas.
-Não deixe a formatação bonita esconder uma conta feita com o tipo errado.
+## O número tem casas demais
 
-## “TypeError: Object of type Decimal is not JSON serializable”
+Confira de onde veio o preço. Se você usou `float` antes de criar o `Decimal`,
+a aproximação já aconteceu. Prefira transformar o texto diretamente:
+`Decimal("12.50")`.
 
-JSON não conhece Decimal. Seu preço pode ser `"12.50"` no disco e Decimal durante
-a conta. Faça uma ida e volta isolada e compare o valor recuperado. Converter para
-float para “resolver o JSON” reintroduz o problema de precisão.
+Para investigar, use `print(type(preco), preco)`. O primeiro valor mostra
+o tipo da informação; o segundo mostra o conteúdo. Retire essa mensagem quando
+entender o problema.
 
-## O desconto passa e o total fica negativo
+## Não consegui salvar Decimal no JSON
 
-A checagem foi esquecida ou colocada só no menu. Chame a função de cálculo
-diretamente com desconto maior que subtotal. Se ela aceitar, o erro está na regra.
-Adicione um teste que espere `ValueError`; depois corrija a função, não apenas a tela.
+Pode aparecer uma mensagem dizendo que `Decimal` não pode ser convertido para
+JSON. Não precisa abandonar a ferramenta: salve o preço como texto e transforme
+em `Decimal` novamente quando precisar calcular.
 
-## O TXT falhou, mas o orçamento aparece
+Pense nisso como mudar a embalagem para guardar, sem mudar o valor.
 
-JSON e TXT são operações diferentes. O primeiro preserva o cadastro e o segundo é
-uma apresentação regenerável. Confira a mensagem antes de criar outra proposta,
-evitando duplicatas. Tente exportar o mesmo ID novamente pela opção 4.
+## O total ficou negativo
 
-## Proposta associada ao cliente errado
+Confira se o desconto é menor ou igual ao subtotal. Essa conferência deve estar
+na função que calcula, não apenas na pergunta do menu. Dessa forma a regra
+continua valendo quando você reutilizar a função em outra parte.
 
-Confundir ID com índice é um erro comum. Mostre ambos ao depurar e procure o registro
-pelo campo `id`. Não use diretamente `clientes[id]`: listas começam em zero e podem
-mudar. Teste um ID ausente e confirme que nenhum orçamento parcial foi salvo.
+## O arquivo de texto não apareceu
 
-Leia o traceback até a primeira linha sua. Crie um exemplo mínimo para cada erro,
-registre o teste e siga para [personalizar](05-finalizacao.md).
+Salvar os dados do orçamento e criar o texto são tarefas diferentes.
+Se o cadastro foi salvo, não cadastre tudo novamente. Na solução pronta,
+a opção de exportar permite gerar de novo o texto de um orçamento existente.
+
+Leia a mensagem com calma e identifique qual parte falhou antes de mexer.
+Um problema no arquivo de texto não deve apagar um orçamento já guardado.
+
+[Anterior: construir](03-primeira-implementacao.md) · [Próximo: personalizar](05-finalizacao.md)

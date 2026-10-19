@@ -1,45 +1,42 @@
-# 2. Planeje a solução
+# 2. Separe cliente, serviços e conta
 
-Separe três entidades: cliente, serviço dentro da proposta e orçamento. Cliente
-tem ID e nome. Serviço tem descrição, quantidade e preço unitário. Orçamento tem
-ID, cliente, data, serviços e desconto.
+Um orçamento junta informações diferentes. Vamos separá-las para não virar uma
+lista de textos que ninguém entende depois.
 
-Não precisamos de um banco externo. Uma lista de clientes e outra de propostas
-resolvem este porte. A relação por `cliente_id` ensina a conectar registros sem
-copiar o cadastro todo. Antes de salvar, confirme que o cliente existe.
+Um cliente precisa de nome e número próprio. Cada serviço precisa de descrição,
+quantidade e preço por unidade. O orçamento reúne os serviços de um cliente e
+o desconto escolhido.
 
-## Dinheiro exige uma escolha explícita
+## Dinheiro merece um cuidado
 
-`float` representa frações em binário; centavos podem não ter representação exata.
-Com `Decimal`, o valor é construído a partir do texto:
+Python tem uma ferramenta chamada `Decimal`, que ajuda a trabalhar com valores
+decimais sem as pequenas aproximações que podem aparecer com `float`.
+
+Veja um exemplo:
 
 ```python
 from decimal import Decimal
 
 preco = Decimal("0.10")
-print(preco * 3)  # 0.30
+print(preco * 3)
 ```
 
-Não use `Decimal(0.1)`: o float já passou pela aproximação. A referência aceita
-duas casas nos valores de entrada, usa centavos e rejeita mais casas em vez de
-arredondar silenciosamente. Consulte a [documentação do Decimal](https://docs.python.org/3.11/library/decimal.html).
+O resultado é `0.30`. Repare nas aspas em `"0.10"`: o valor começa como texto.
+Use esse cuidado também nos preços que vierem do teclado.
 
-## Planeje as funções
+Vamos aceitar até duas casas depois da vírgula ou do ponto. Não precisamos
+trabalhar com frações menores que um centavo neste projeto.
 
-`criar_item` valida um serviço. `calcular_totais` soma quantidade vezes preço e
-subtrai o desconto. `criar_orcamento` liga cliente e serviços. `formatar_orcamento`
-devolve uma string, sem imprimir nem abrir arquivo. O menu decide quando exibir
-e quando escrever essa string.
+## Uma função para cada parte
 
-```text
-cadastrar ou escolher cliente
-receber serviços validados
-calcular totais e conferir desconto
-criar proposta com ID
-salvar JSON
-formatar e exportar TXT
-```
+Planeje uma função para criar o serviço, outra para somar os valores e outra
+para montar o texto do orçamento. O menu pergunta e mostra; as funções fazem
+as contas. Assim você consegue entender cada parte separadamente.
 
-Decimal não é serializável diretamente pelo JSON padrão. Guarde `"12.50"` e
-reconstrua Decimal ao calcular. Não guarde um total independente que pode divergir
-dos itens. Desenhe seu JSON e siga para [construir](03-primeira-implementacao.md).
+Na hora de salvar em JSON, o preço será texto, como `"12.50"`. Na hora de
+calcular, transforme novamente em `Decimal`: JSON não guarda esse tipo diretamente.
+
+Anote a ordem: escolher cliente, acrescentar serviços, calcular, salvar e mostrar.
+Antes de seguir, confira se consegue contar esse caminho sem olhar o código.
+
+[Anterior: a ideia](01-entenda-o-problema.md) · [Próximo: montar o orçamento](03-primeira-implementacao.md)

@@ -1,22 +1,35 @@
-# 5. Evolua sozinho
+# 5. Seu programa já conversa com outro serviço
 
-Execute uma consulta válida, uma inválida e outra válida. Saia, abra sem consultar
-a API e leia o histórico. Você consegue explicar quais operações usam rede e
-quais usam disco? Essa distinção será útil em praticamente qualquer aplicação.
+Você começou pedindo um texto pelo teclado e terminou buscando informações
+em outro computador. É uma mudança importante, mas o raciocínio continua parecido:
+receber algo, conferir, trabalhar com os dados e mostrar um resultado.
 
-Antes de consultar a referência inteira, descreva `normalizar_cep` e
-`interpretar_resposta` em palavras. Uma cuida da entrada local; a outra verifica
-um sistema externo. Trocar o transporte por um simulador não muda essas regras.
+## Use o caminho completo
 
-Escolha uma melhoria de [desafios.md](../desafios.md). Comece escrevendo a regra
-e um caso de teste. Um cache, por exemplo, economiza rede, mas pode ficar antigo:
-se você escolher esse desafio, mostre ao usuário quando o endereço veio do histórico.
-Não apresente cache como consulta atualizada.
+Consulte o CEP público do exemplo. Depois, digite um CEP incompleto e veja se
+o programa explica o problema. Faça outra consulta válida, saia e abra novamente.
 
-Prepare uma demonstração com endereço público de referência, não com o endereço
-da sua casa. Documente timeout, dependência externa e caminho do histórico. Um
-portfólio sério explica limitações em vez de prometer que a API nunca falha.
+Agora escolha o histórico. Os endereços anteriores devem aparecer sem uma nova
+consulta. Consegue explicar a diferença entre buscar pela internet e ler um
+arquivo que já está no seu computador?
 
-Marque o [checklist](../checklist.md) e registre um commit com o teste acrescentado.
-No próximo projeto, os dados voltarão a ser locais, mas uma operação com dinheiro
-exigirá cuidado diferente: [OrçaDev](../../03-orcadev/README.md).
+Se sim, você entendeu o principal deste projeto. Se ainda ficar confuso, acompanhe
+uma consulta desde a primeira função até o salvamento.
+
+## Escolha uma melhoria pequena
+
+Você pode mostrar quando cada consulta foi feita ou permitir escolher um endereço
+do histórico. Há sugestões em [ideias para continuar](../desafios.md).
+Se precisar de um empurrão, [abra uma ajuda](../dicas.md) só para a parte
+que está tentando resolver.
+
+Quando mostrar o projeto para outra pessoa, use um endereço público de exemplo.
+Não precisa publicar o endereço da sua casa para provar que funciona.
+
+A solução pronta ajuda a comparar sua organização depois da tentativa. Você não
+precisa usar exatamente os mesmos nomes ou a mesma divisão de funções.
+
+Confira [o que aprendeu](../checklist.md). No próximo projeto, vamos trocar
+endereços por serviços, preços e orçamentos.
+
+[Anterior: entender as falhas](04-evoluindo-o-projeto.md) · [Próximo projeto: OrçaDev](../../03-orcadev/README.md)

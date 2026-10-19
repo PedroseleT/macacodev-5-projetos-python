@@ -1,40 +1,41 @@
-# 3. Construa por etapas
+# 3. Vamos montar o primeiro orçamento
 
-## A · cliente e serviço
+Comece abrindo `codigo-inicial/main.py` e `codigo-inicial/tarefas.py`.
+O primeiro mostra o menu. No segundo, você vai acrescentar suas funções e
+substituir as orientações pelo comportamento que construir.
 
-Objetivo: representar dados sem menu. Conceitos: dicionários e validação. Tarefa:
-crie um cliente com ID e um serviço com descrição, quantidade inteira e preço
-Decimal. Esperado: descrição vazia e quantidade zero são rejeitadas. Teste valores
-diretos; conecte `input` somente depois.
+Na pasta principal da trilha, rode:
 
-## B · calcule um subtotal
+```sh
+python 03-orcadev/codigo-inicial/main.py
+```
 
-Objetivo: transformar uma lista de serviços em um resultado. Conceitos: acumulação
-com `for` e Decimal. Comece com dois itens e calcule à mão. Tarefa: devolva subtotal,
-desconto e total em um dicionário. Esperado: 3 serviços de R$ 0,10 totalizam exatamente
-R$ 0,30. Teste desconto zero, igual ao subtotal e maior que ele.
+## Um cliente, depois um serviço
 
-## C · monte uma proposta
+Guarde um cliente em um dicionário com ID e nome. Não aceite nome em branco.
+Depois, faça uma função para criar um serviço com descrição, quantidade inteira
+e preço em `Decimal`.
 
-Objetivo: associar cliente existente e serviços. Conceitos: busca por ID e cópia.
-Tarefa: crie dois orçamentos para o mesmo cliente, mantendo IDs diferentes.
-Esperado: ID de cliente inexistente não cria proposta. Teste que a lista original
-não muda quando uma validação falha no meio da operação.
+Comece com valores escritos no código. Quando essa parte estiver clara, conecte
+as perguntas do menu às funções.
 
-## D · texto antes do arquivo
+## Faça a conta aparecer
 
-Objetivo: apresentar dados claramente. Conceitos: f-strings e `join`. Tarefa: monte
-uma lista de linhas com título, cliente, itens e total. Esperado: preço R$ 12,50 e
-total R$ 25,00 para duas unidades. Verifique o conteúdo da string em um teste antes
-de tentar abrir um TXT no editor.
+Multiplique a quantidade de cada serviço pelo preço. Some os resultados.
+Essa soma é o subtotal. Depois tire o desconto e mostre os três valores.
 
-## E · persistência e recuperação
+Use o exemplo da página anterior: subtotal de R$ 30,00 e desconto de R$ 4,00
+precisam chegar a R$ 26,00. Se o desconto passar do subtotal, peça outro valor.
 
-Objetivo: consultar propostas antigas após reiniciar. Conceitos: JSON e conversão
-de tipos. Tarefa: transforme preços em strings no arquivo e use Decimal na leitura
-dos cálculos. Esperado: texto do orçamento antes e depois da recuperação é igual.
-Teste também um orçamento que referencia um cliente inexistente no arquivo.
+## Organize a apresentação
 
-No menu, se a exportação TXT falhar depois de salvar JSON, informe as duas situações
-separadamente. Não diga que o orçamento inteiro desapareceu. Passe para
-[depuração](04-evoluindo-o-projeto.md).
+Monte um texto com título, nome do cliente, serviços e total. Uma lista de linhas
+pode ajudar; `"\n".join(linhas)` junta essas linhas com uma quebra entre elas.
+
+Só depois salve esse texto em um arquivo `.txt`. Guarde também os dados do
+orçamento em JSON, para consultar e gerar o texto de novo sem refazer o cadastro.
+
+Crie outro orçamento para o mesmo cliente. Os dois precisam ter números próprios
+e continuar disponíveis depois que o programa for fechado.
+
+[Anterior: organizar](02-planeje-a-solucao.md) · [Próximo: conferir o que deu errado](04-evoluindo-o-projeto.md)

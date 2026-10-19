@@ -1,30 +1,33 @@
-# 1. Entenda o problema
+# 1. Um CEP pode poupar bastante digitação
 
-Você já precisou preencher a cidade, o bairro e a rua repetidamente? Um CEP pode
-ser usado para consultar parte desse endereço. O problema deixa de ser “guardar
-tudo que o usuário digitou” e passa a incluir “pedir informação a outro sistema”.
+Você começa a preencher um endereço: rua, bairro, cidade, estado... Não seria
+melhor informar só o CEP e deixar o programa procurar parte dessas informações?
 
-Uma **API** é uma interface pela qual programas conversam. Pense num balcão com
-regras: você faz um pedido no formato aceito e recebe uma resposta também definida.
-Isso não significa que o serviço sempre estará disponível ou que aceitará qualquer
-texto enviado.
+É isso que vamos construir. Diferente do primeiro projeto, agora nem tudo virá
+do teclado. Nosso programa vai pedir ajuda a outro serviço pela internet.
 
-Neste projeto, o pedido é uma **requisição HTTP** para uma URL do ViaCEP. A
-**resposta HTTP** tem um status, como 200 quando a consulta é atendida, e um corpo.
-O corpo esperado usa **JSON**, texto estruturado com chaves e valores. Python pode
-transformar esse texto em um dicionário com `json.loads`.
+## Sem mistério com os nomes
 
-Exemplo de pedido: `https://viacep.com.br/ws/01001000/json/`. Você solicita um CEP
-específico, não uma lista de moradores. A resposta contém campos como `localidade`
-e `uf`. Confira o [contrato oficial](https://viacep.com.br/) antes de programar.
+Uma **API** é uma forma de um programa pedir informações a outro. Pense num
+balcão: você faz um pedido seguindo algumas regras e recebe uma resposta.
 
-## Sua tarefa antes do código
+Aqui, usaremos o ViaCEP, um serviço público de consulta de endereços. Você envia
+um CEP e recebe informações como cidade e estado. Não precisa criar conta nem
+conseguir uma chave para usar este projeto.
 
-Escreva quatro conversas: CEP válido; texto com letras; CEP de oito dígitos que
-não existe; conexão indisponível. Qual erro pode ser descoberto antes da internet?
-Qual depende da resposta do servidor? Essa separação evita chamadas desnecessárias.
+O pedido pela internet é chamado de **requisição HTTP**. A resposta vem em
+**JSON**, aquele texto organizado que apareceu no projeto anterior. Vamos ver
+um exemplo pequeno antes de juntar tudo.
 
-O resultado final terá um menu para consultar várias vezes e ver consultas já
-salvas. Somente respostas válidas entram no histórico. Você já conhece listas,
-funções e JSON; agora aprenderá a tratar uma fronteira externa. Siga para
-[planejar essa fronteira](02-planeje-a-solucao.md).
+## O que o programa fará?
+
+Ele pedirá o CEP, mostrará o endereço e guardará as consultas que deram certo.
+Você também poderá consultar o histórico sem fazer outro pedido pela internet.
+
+Mas a internet pode falhar. Um CEP também pode ter o formato certo e não existir.
+Precisamos explicar essas situações sem fechar o programa do nada.
+
+Antes de seguir, escreva como seria uma consulta bem-sucedida e como você
+gostaria de ser avisado se não houvesse conexão. Não precisa escrever código ainda.
+
+[Voltar à apresentação](../README.md) · [Próximo: dividir a consulta em partes](02-planeje-a-solucao.md)

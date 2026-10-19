@@ -1,91 +1,77 @@
-# 02 · BuscaCEP Inteligente 📍
+# 2. BuscaCEP Inteligente 📍
 
-**Iniciante a intermediário · consulte um endereço sem digitar cada campo.**
+**Você digita o CEP e o programa descobre a rua, o bairro, a cidade e o estado.**
 
-O programa recebe CEP com ou sem hífen, consulta o ViaCEP e mostra logradouro,
-bairro, cidade e estado. Consultas válidas ficam num histórico local, inclusive
-consultas repetidas. O histórico pode ser lido offline.
+Já viu um formulário completar o endereço depois que você informa o CEP?
+Vamos construir uma versão pequena dessa ideia. Aqui a novidade é buscar uma
+informação na internet, em vez de pedir que a pessoa digite tudo.
+
+### [Começar: entender como a consulta funciona →](passo-a-passo/01-entenda-o-problema.md)
+
+É mais fácil acompanhar depois do [primeiro projeto](../01-desperdicio-zero/README.md).
+
+## Como vai ficar?
 
 ```text
-1 Consultar CEP | 2 Histórico | 0 Sair
-Escolha: 1
-CEP: 01001-000
-CEP: 01001-000
-Logradouro: Praça da Sé
+Digite um CEP: 01001-000
+
+Rua: Praça da Sé
 Bairro: Sé
-Cidade: São Paulo | Estado: SP
-Consulta salva no histórico.
+Cidade: São Paulo
+Estado: SP
 ```
 
-Exemplo de endereço público de referência do [ViaCEP](https://viacep.com.br/), não
-dado de uma pessoa. Uma resposta pode mudar com a base do serviço.
+Esse é um endereço público usado como exemplo pelo [ViaCEP](https://viacep.com.br/),
+o serviço gratuito que vamos consultar. A base dele pode ser atualizada.
+Você pode digitar com ou sem hífen, fazer outras consultas e ver as anteriores.
 
-## Funcionalidades e conceitos
+## O que você vai aprender
 
-Validação local de oito dígitos ASCII, consulta HTTPS com timeout de 10 segundos,
-tratamento de CEP inexistente, HTTP inesperado, conexão, JSON inválido e resposta
-incompleta. Respostas não correspondentes ao CEP solicitado são rejeitadas. Rua e
-bairro vazios são permitidos para CEPs genéricos de município.
+A conferir um texto antes de usar, pedir informações a outro programa e mostrar
+uma mensagem útil quando algo não der certo. Uma consulta pode falhar porque
+o CEP não existe ou porque a conexão caiu, por exemplo.
 
-Você pratica strings, funções, módulos, exceções, APIs, JSON, `urllib.request` e
-persistência. Precisa entender funções e arquivos do projeto anterior. API,
-requisição e resposta são explicadas no tutorial, antes da chamada de rede.
+Você vai encontrar a palavra **API**: é uma forma de programas conversarem.
+A gente explica isso com calma antes de fazer a consulta. Não precisa decorar
+siglas nem criar conta em serviço nenhum.
 
-## Instalação e execução
+## Seu caminho
 
-Python 3.11+; nenhuma dependência para instalar. Na raiz:
+1. [Entenda o que vamos buscar](passo-a-passo/01-entenda-o-problema.md)
+2. [Pense no pedido e na resposta](passo-a-passo/02-planeje-a-solucao.md)
+3. [Faça a primeira consulta por partes](passo-a-passo/03-primeira-implementacao.md)
+4. [E se a internet ou o CEP não ajudar?](passo-a-passo/04-evoluindo-o-projeto.md)
+5. [Escolha sua próxima melhoria](passo-a-passo/05-finalizacao.md)
+
+[Precisa de uma dica?](dicas.md) · [Ideias para continuar](desafios.md)
+· [O que já consegui fazer?](checklist.md)
+
+<details><summary>Quero abrir a versão pronta</summary>
+
+No terminal, na pasta principal dos cinco projetos:
 
 ```sh
-python 02-buscacep/codigo-inicial/main.py
 python 02-buscacep/solucao/main.py
-python 02-buscacep/solucao/main.py --dados 02-buscacep/dados/experimento.json
 ```
 
-Só consultas novas exigem internet. O programa não coleta pessoas, não usa chaves
-de API e não consulta bases em massa. Respeite a [orientação do ViaCEP](https://viacep.com.br/).
+Escolha `1` para consultar, `2` para ver o histórico ou `0` para sair.
+Uma consulta nova precisa de internet. Ver o que já foi salvo não precisa.
+CEP de município pode vir sem rua ou bairro; nesse caso, o programa mostra
+que o campo não foi informado.
 
-## Estrutura e persistência
+</details>
 
-```text
-codigo-inicial/main.py, tarefas.py
-solucao/main.py
-solucao/buscacep/servico.py        validação e HTTP
-solucao/buscacep/dominio.py        histórico de consultas válidas
-solucao/buscacep/arquivos.py       JSON e escrita por substituição
-solucao/buscacep/terminal.py       menu
-testes/test_buscacep.py
-passo-a-passo/                    cinco tutoriais
-```
+<details><summary>Onde ficam as consultas anteriores?</summary>
 
-Padrão: `02-buscacep/dados/historico.json`, calculado a partir da localização do
-programa, não do diretório atual. Criado na primeira consulta salva. Data/hora de
-consulta usa ISO com fuso UTC; o endereço conserva o formato retornado pela API.
-Arquivo ausente inicia histórico vazio. Falha de consulta não cria registro.
+Em `dados/historico.json`, dentro deste projeto. Cada consulta que deu certo
+fica registrada com data e hora. Consultar o mesmo CEP novamente cria outro
+registro. Uma consulta que falhou não entra na lista.
 
-Arquivo corrompido, versão desconhecida ou estrutura inválida impedem abertura:
-o original é preservado. Feche o programa, faça cópia e restaure um backup ou
-corrija o JSON. Para zerar por decisão sua, mova o arquivo para outro lugar.
-Uma falha de gravação é informada; o endereço consultado não deve ser confundido
-com histórico salvo. Não execute duas instâncias sobre o mesmo JSON.
+Feche o programa antes de copiar o arquivo como backup. Se ele tiver um
+problema, o programa avisa sem apagar seu conteúdo. Preserve uma cópia antes
+de tentar corrigir. Use uma janela por vez e faça consultas individuais:
+o ViaCEP não é para baixar uma base inteira de endereços.
 
-## Testes offline
+</details>
 
-```sh
-cd 02-buscacep
-python -m unittest discover -s testes -v
-```
-
-As respostas HTTP são simuladas, incluindo erro 503, timeout, CEP inexistente,
-UTF-8 inválido, JSON inesperado e resposta muito grande. Não há chamadas reais de
-rede nos testes. Sua implementação pode receber uma função de consulta simulada;
-veja o tutorial antes de estudar o uso de mocks na referência.
-
-## Trilha
-
-1. [Entenda o problema](passo-a-passo/01-entenda-o-problema.md)
-2. [Planeje](passo-a-passo/02-planeje-a-solucao.md)
-3. [Construa](passo-a-passo/03-primeira-implementacao.md)
-4. [Depure](passo-a-passo/04-evoluindo-o-projeto.md)
-5. [Evolua](passo-a-passo/05-finalizacao.md)
-
-[Desafios](desafios.md) · [Dicas](dicas.md) · [Checklist](checklist.md) · [Voltar](../README.md)
+[Voltar ao início](../README.md) · [Como pedir ajuda](../COMO-CONTRIBUIR.md)

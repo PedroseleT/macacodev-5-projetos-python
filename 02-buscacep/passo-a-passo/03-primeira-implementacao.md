@@ -1,48 +1,47 @@
-# 3. Construa por etapas
+# 3. Vamos buscar um endereço
 
-## A · valide sem internet
+Abra os arquivos de `codigo-inicial`. O `main.py` mostra um menu; o `tarefas.py`
+traz orientações para você substituir, aos poucos, por funções suas. Rode pela
+pasta principal da trilha:
 
-Objetivo: preservar os zeros e rejeitar formatos ruins. Conceito: strings e
-condicionais. Tarefa: aceite “01001000” e “01001-000”; rejeite “123”, letras e espaço
-interno. Esperado: sempre oito dígitos na saída válida. Teste a função diretamente,
-sem `input`. Expressões regulares são opcionais na sua primeira tentativa; compare
-comprimento e posições para entender a regra antes de estudar `re.fullmatch`.
+```sh
+python 02-buscacep/codigo-inicial/main.py
+```
 
-## B · interprete um endereço local
+## Comece sem usar a internet
 
-Objetivo: entender JSON antes de depender de HTTP. Conceitos: dicionário e exceções.
-Experimente:
+Faça uma função que recebe o CEP e confere o formato. Aceite oito dígitos,
+com ou sem o hífen na posição certa. Não “conserte” um texto cheio de letras:
+explique que a pessoa precisa informar um CEP.
+
+Experimente escrever `01001-000` e depois `123`. Só o primeiro deve continuar.
+
+## Entenda uma resposta pequena
+
+Antes da consulta, veja como Python lê JSON:
 
 ```python
 import json
 
-texto = '{"localidade": "São Paulo", "uf": "SP"}'
-dados = json.loads(texto)
-print(dados["localidade"])
+resposta = '{"localidade": "São Paulo", "uf": "SP"}'
+endereco = json.loads(resposta)
+print(endereco["localidade"])
 ```
 
-Tarefa: valide um endereço completo e separe o caso `{"erro": true}`. Esperado:
-uma lista `[]` não é aceita como endereço. Teste campo ausente e rua vazia.
+A saída é `São Paulo`. `json.loads` transformou o texto em um dicionário.
+É assim que conseguiremos acessar cada informação da resposta.
 
-## C · faça uma consulta real controlada
+## Agora faça o pedido
 
-Objetivo: usar uma biblioteca padrão para transporte. Conceitos: `with`, bytes e
-decodificação. Estude `urllib.request.urlopen`, seu parâmetro `timeout` e a conversão
-de bytes UTF-8 para texto. Tarefa: conectar o CEP validado ao parser da etapa B.
-Esperado: erro de rede vira mensagem e permite outra tentativa. Não coloque a
-URL recebida livremente pelo usuário: monte a URL oficial a partir do CEP validado.
+Use `urlopen`, de `urllib.request`, com `timeout=10`. Esse limite evita esperar
+para sempre. Leia a resposta, transforme os bytes em texto com `decode("utf-8")`
+e passe esse texto para `json.loads`.
 
-## D · simule para testar
+Peça o CEP conferido, mostre rua, bairro, cidade e estado. Se vier `{"erro": true}`,
+avise que o CEP não foi encontrado.
 
-Objetivo: repetir o mesmo teste sem rede. Conceito: substituir uma dependência.
-Uma função que chama a internet pode receber outra função que entrega uma resposta
-controlada. Essa é a ideia por trás do `abrir` opcional e dos mocks da referência.
-Tarefa: simule resposta válida e conexão indisponível. Esperado: resultados idênticos
-em execuções sucessivas, mesmo com Wi-Fi desligado.
+Só depois conecte tudo ao menu e acrescente o histórico. Salve apenas consultas
+válidas. Saia e abra novamente: consultar o histórico deve mostrar o que já foi
+salvo, sem fazer outra chamada ao ViaCEP.
 
-## E · mantenha histórico
-
-Objetivo: aplicar JSON em dados já validados. Tarefa: após uma consulta bem-sucedida,
-grave endereço e instante. Esperado: erro HTTP não aumenta o histórico; reiniciar
-preserva consultas. A listagem do histórico não deve chamar ViaCEP. Continue para
-[investigar falhas](04-evoluindo-o-projeto.md).
+[Anterior: organizar](02-planeje-a-solucao.md) · [Próximo: quando a consulta falha](04-evoluindo-o-projeto.md)

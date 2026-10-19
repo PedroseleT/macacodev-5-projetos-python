@@ -1,38 +1,37 @@
-# 4. Aprenda com os erros
+# 4. Acompanhe o que mudou e o que deveria ficar
 
-## O filtro apagou o resto das vagas
+Neste projeto, algumas ações só mostram informações; outras mudam o que está
+salvo. Confundir as duas coisas é uma fonte comum de dor de cabeça.
 
-Você provavelmente atribuiu o resultado ao estado principal. Um filtro é uma
-consulta, não uma exclusão. Imprima os IDs antes e depois e verifique se a função
-devolve outra lista. Acrescente um teste que compara o estado original após buscar.
+## Fiz uma busca e as outras vagas sumiram
 
-## Editar o cargo apagou o link
+Talvez você tenha colocado o resultado da pesquisa no lugar da lista completa.
+Uma busca deve devolver outra lista, sem substituir o cadastro inteiro.
 
-Reconstruir o registro só com os campos recebidos perde informações. Atualização
-parcial deve partir do registro existente e alterar apenas chaves permitidas.
-Teste preservação de empresa, link e criação ao mudar o cargo.
+Mostre os IDs antes e depois da pesquisa com `print`. A lista principal deve
+continuar com a mesma quantidade de vagas.
 
-## A lista está vazia, mas a estatística mostra erro
+## Mudei o cargo e perdi o link
 
-Se você calcula percentuais sem verificar o total, pode dividir por zero. Nesta
-versão as estatísticas são contagens; a soma de todas as categorias deve ser o total.
-Teste o estado vazio antes de acrescentar qualquer fórmula.
+Se você criar uma ficha nova só com os campos digitados na edição, os outros
+ficam de fora. Parta da ficha existente e troque apenas o que a pessoa escolheu.
 
-## O CSV abriu em colunas estranhas
+Não altere o ID: ele continua identificando a mesma oportunidade.
 
-Pode haver separador diferente no aplicativo de planilhas, mas também pode ser
-um erro seu: concatenar vírgulas sem escape. Abra com `csv.DictReader`, confira
-as chaves e um nome que contenha vírgula e aspas. No Excel, escolha importar UTF-8
-com delimitador vírgula em vez de alterar seu JSON para “consertar” a visualização.
+## Excluí uma vaga, mas saiu outra
 
-## “ValueError: Invalid IPv6 URL” ao ler um link
+A posição de uma ficha na busca pode ser diferente da posição na lista completa.
+Procure pelo ID, não pela posição que apareceu na tela.
 
-Até a análise sintática de uma URL pode lançar exceção quando o texto é malformado.
-Isole a validação de link e converta esse erro em uma mensagem do domínio. Não abra
-um endereço arbitrário para descobrir se está bem formado.
+Mostrar a empresa e o cargo antes da confirmação também ajuda a evitar enganos.
 
-## Minha exclusão removeu a candidatura errada
+## A tabela ficou estranha na planilha
 
-Verifique se você confundiu ID com posição. Uma lista filtrada tem posições
-diferentes da coleção original. Localize pelo ID estável e use confirmação. Faça
-um teste com dois registros da mesma empresa antes de [finalizar](05-finalizacao.md).
+Use o módulo `csv`, em vez de juntar os campos colocando vírgulas manualmente.
+Se o arquivo estiver certo, mas a planilha mostrar tudo numa coluna, procure a
+opção de importar usando vírgula como separador e UTF-8 para os acentos.
+
+Se aparecer uma mensagem de erro, leia a última linha e acompanhe a função
+indicada. Resolva uma situação pequena antes de continuar acrescentando opções.
+
+[Anterior: construir](03-primeira-implementacao.md) · [Próximo: sua próxima criação](05-finalizacao.md)

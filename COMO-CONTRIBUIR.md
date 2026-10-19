@@ -1,29 +1,62 @@
-# Como contribuir
+# Encontrou uma dúvida ou quer ajudar?
 
-Use português brasileiro, exemplos pequenos e decisões que um iniciante consiga
-acompanhar. Uma contribuição pode corrigir um link, explicar melhor um erro ou
-adicionar um teste; não precisa começar com uma funcionalidade grande.
+Não precisa saber tudo de Git para participar. Avisar que uma explicação ficou
+confusa já ajuda a melhorar a trilha.
 
-## Dúvida ou defeito
+## Quero pedir ajuda
 
-Abra [uma issue](https://github.com/PedroseleT/macacodev-5-projetos-python/issues/new/choose).
-Informe projeto, sistema operacional, versão do Python, comando, entrada, resultado
-esperado e resultado recebido. Apague nomes reais, links privados e informações
-pessoais antes de anexar arquivos. Use os modelos disponibilizados no GitHub.
+Abra [uma conversa de dúvida ou problema](https://github.com/PedroseleT/macacodev-5-projetos-python/issues/new/choose).
+O GitHub chama isso de **issue** e pede uma conta para publicar.
 
-## Alteração de código ou documentação
+Conte, do seu jeito:
 
-1. Faça um fork e uma branch como no [guia de Git](COMO-USAR-GIT-E-GITHUB.md).
-2. Reproduza o problema; para um defeito, acrescente um teste que falhe antes.
-3. Mantenha interface, regras e persistência separadas. Use biblioteca padrão.
-4. Execute `python scripts/testar.py` e `python scripts/verificar_documentacao.py` na raiz.
-5. Execute `git diff --check` e confira se nenhum dado pessoal entrou no diff.
-6. Abra um Pull Request com o motivo, resultado e testes realmente executados.
+- Qual projeto e qual etapa você está seguindo.
+- O que estava tentando fazer.
+- O que apareceu na tela, incluindo a mensagem de erro.
+- O que você já tentou mudar.
 
-Soluções novas devem funcionar em Python 3.11+, usar `pathlib`, nomes em português
-e funções compreensíveis. Docstrings orientam decisões, não narram cada atribuição.
-Se usar uma ferramenta de IA, revise, execute e explique o código: a responsabilidade
-pela contribuição continua sendo de quem a envia.
+Se puder, inclua o comando usado e sua versão do Python, que aparece com
+`python --version`. Não precisa escrever um relatório perfeito para pedir ajuda.
 
-Os desafios são atividades para praticar. Evite publicar respostas completas em
-issues de dicas; primeiro descreva sua tentativa e a dúvida específica.
+As mensagens são públicas. Apague nomes reais, endereços, currículos, senhas e
+outras informações pessoais antes de enviar texto, arquivo ou imagem.
+
+## Quero melhorar uma explicação
+
+Pode ser só uma frase mais clara, um exemplo ou um link que não abriu.
+Você pode abrir uma issue dizendo onde está o problema e sugerindo outra forma
+de explicar. Não precisa começar alterando código.
+
+Se quiser propor a mudança diretamente, o
+[guia de Git e GitHub](COMO-USAR-GIT-E-GITHUB.md) explica como criar sua cópia
+e enviar uma sugestão de alteração.
+
+## Quero mudar o código
+
+Escolha uma mudança pequena e explique o motivo. Antes de enviar, use o programa
+e confira o resultado. Quem revisa precisa entender o que mudou e o que você
+conseguiu verificar.
+
+<details><summary>Conferências técnicas para quem vai enviar uma alteração</summary>
+
+As soluções usam Python 3.11 ou mais recente, biblioteca padrão, funções pequenas
+e nomes claros em português. Mantenha o menu separado das contas, regras e arquivos.
+
+Para mudanças no código de referência, acrescente uma verificação automática do
+comportamento novo. As instruções e comandos ficam em
+[informações para manutenção](docs/manutencao/README.md).
+
+Antes de enviar, confira também os links e se nenhum dado pessoal entrou nos
+arquivos. Abra o Pull Request contando o problema, a mudança e as verificações
+que você realmente executou.
+
+</details>
+
+Usou uma ferramenta de IA? Leia, execute e entenda a sugestão antes de enviar.
+A contribuição continua sendo sua responsabilidade.
+
+Evite publicar a resposta completa de um desafio numa conversa de dicas.
+Prefira contar sua tentativa e a parte em que travou, para outras pessoas
+também terem espaço para aprender.
+
+[Voltar à apresentação](README.md) · [Começar a trilha](COMECE-AQUI.md)

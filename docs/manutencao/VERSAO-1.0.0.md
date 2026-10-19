@@ -1,4 +1,4 @@
-# MacacoDev — 5 Projetos Python · v1.0.0
+# Histórico: MacacoDev — 5 Projetos Python · v1.0.0
 
 Primeira versão pública da trilha para sair do tutorial e construir projetos.
 

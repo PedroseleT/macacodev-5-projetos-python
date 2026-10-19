@@ -1,20 +1,45 @@
-# Desafios
+# Ideias para continuar
 
-## Fácil · reapresentar do histórico
-Descrição: selecionar uma consulta pelo número exibido. Objetivo: separar leitura
-local de rede. Requisitos: não chamar HTTP; informar a data do registro. Conclusão:
-funciona offline e rejeita índice inexistente. Dicas: enumere a lista; confira
-limites antes de acessar; teste com o histórico vazio.
+Primeiro deixe a consulta básica funcionando. Depois escolha uma melhoria que
+você gostaria de usar.
 
-## Médio · exportar um endereço
-Descrição: salvar um endereço escolhido em texto. Objetivo: formatar e escrever.
-Requisitos: UTF-8, campos rotulados e caminho de saída informado. Conclusão: acentos
-preservados e nenhuma alteração no histórico. Dicas: monte uma string antes de
-escrever; teste em TemporaryDirectory.
+## Para começar: abrir um endereço do histórico
 
-## Avançado · cache com prazo
-Descrição: reutilizar um endereço recente e permitir atualização explícita.
-Objetivo: modelar validade de dados externos. Requisitos: prazo configurável,
-origem local/rede visível e fallback documentado. Conclusão: testes com relógio fixo
-cobrem cache recente, expirado e rede indisponível. Dicas: separe a decisão “pode
-usar?” da função que consulta; consulte `dicas.md` antes de mudar tudo.
+Mostre os registros com números e permita escolher um para ver todos os campos.
+A ideia é reutilizar informações já salvas.
+
+**Está pronto quando:** funciona sem uma nova consulta e avisa quando o número
+escolhido não existe, inclusive se o histórico estiver vazio.
+
+<details><summary>Uma pista</summary>
+Liste os registros com <code>enumerate</code>. Confira o número antes de acessar a lista.
+Mostre também quando aquela consulta foi feita.
+</details>
+
+## Um passo além: salvar um endereço em texto
+
+Escolha uma consulta e gere um arquivo com rua, bairro, cidade e estado.
+Não altere o histórico para fazer isso.
+
+**Está pronto quando:** o arquivo abre com os acentos corretos e cada informação
+tem um rótulo fácil de entender.
+
+<details><summary>Uma pista</summary>
+Monte o texto primeiro e mostre na tela. Só depois grave em um arquivo,
+usando UTF-8 para preservar os acentos.
+</details>
+
+## Um desafio maior: evitar repetir uma consulta recente
+
+Se aquele CEP foi consultado há pouco, ofereça o resultado salvo.
+Deixe claro que veio do histórico e permita pedir uma atualização.
+
+**Está pronto quando:** existe um prazo definido, resultados antigos provocam
+nova consulta e uma falha de rede não aparece como endereço atualizado.
+
+<details><summary>Uma pista</summary>
+Compare a data da consulta com a hora atual antes de decidir usar a internet.
+Separe a decisão de usar o histórico da função que pede o endereço.
+</details>
+
+[Voltar à última etapa](passo-a-passo/05-finalizacao.md)

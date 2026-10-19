@@ -1,38 +1,38 @@
-# 4. Aprenda com os erros
+# 4. Deu erro? Vamos descobrir juntos
 
-## “TypeError: ... str ... int”
+O programa rodar de primeira seria ótimo, mas erro faz parte. O importante é
+descobrir em qual pedacinho ele começou, em vez de mudar dez coisas ao mesmo tempo.
 
-`input` devolve texto. Comparar ou somar esse texto com números não converte o valor
-automaticamente. Observe `print(type(quantidade), repr(quantidade))`. Converta em
-uma função de validação e trate `ValueError` quando o texto não for um número.
-Não use `eval`: você precisa de um número, não de executar código digitado.
+## A quantidade não vira número
 
-## “ValueError: day is out of range for month”
+Se você digitou “duas”, Python não consegue transformar isso em um número.
+Pode aparecer `ValueError`. Essa mensagem não significa que perdeu o projeto:
+significa que aquela conversão não funcionou.
 
-A string parece uma data, mas aquele dia não existe. O calendário é mais complexo
-do que checar se tem dez caracteres. Use o parser de datas e transforme a exceção
-em uma mensagem compreensível. Um `try` ao redor do menu permite repetir a operação;
-isso não significa colocar um `except Exception` escondendo qualquer defeito.
+Use `try` e `except ValueError` ao fazer a conversão. No `except`, explique
+“Digite uma quantidade em números” e permita outra tentativa. Quantidade zero
+ou negativa também precisa de uma mensagem, mesmo sendo um número.
 
-## A banana mudou de identidade
+## A data parece certa, mas não existe
 
-Se você usa a posição da lista como ID, remover o primeiro item muda todas as
-referências. Imprima a lista antes e depois de `pop`. Separe identidade da posição
-e teste o fluxo cadastrar → remover → cadastrar.
+31/02 tem o formato esperado, mas fevereiro não tem esse dia. A conversão de datas
+do Python percebe isso. Evite tentar resolver contando só os caracteres do texto.
 
-## O arquivo existe, mas “perdeu tudo”
+## Sumiu o alimento errado
 
-Um erro de JSON não é uma lista vazia. Trocar qualquer falha por `[]` faz o próximo
-salvamento apagar o histórico. A referência interrompe a abertura e preserva o
-arquivo inválido. Leia o traceback: `JSONDecodeError` informa linha e coluna.
-Faça backup antes de corrigir aspas, vírgulas ou chaves manualmente.
+Olhe o ID de cada alimento antes da remoção. O número próprio do alimento não
+é a mesma coisa que sua posição na lista. A posição muda quando alguém sai;
+o ID dos outros alimentos deve continuar igual.
 
-## Um teste para uma descoberta
+## Um jeito simples de investigar
 
-Reproduza o erro com o menor registro possível. Escreva o resultado esperado, faça
-a correção e execute novamente. Para datas, passe uma data fixa à função. Para
-arquivos, use `TemporaryDirectory` para não misturar testes com inventário real.
+Coloque `print(alimentos)` antes e depois da parte que parece errada. Veja o que
+mudou. Depois que entender, retire essas mensagens extras.
 
-Confira também `NaN`: `float("NaN")` não dá erro, mas não representa quantidade
-útil. Por isso a referência usa `math.isfinite`. Registre essa descoberta no seu
-caderno e teste uma entrada infinita antes de [finalizar](05-finalizacao.md).
+Se aparecer um texto grande de erro, comece pela última linha: ela costuma indicar
+o tipo de problema. Procure também a linha do seu arquivo mencionada acima dela.
+
+Nunca apague automaticamente um arquivo que falhou ao abrir. Faça uma cópia antes
+de tentar corrigir: não queremos trocar um pequeno erro por uma lista perdida.
+
+[Anterior: construir](03-primeira-implementacao.md) · [Próximo: deixar com a sua cara](05-finalizacao.md)

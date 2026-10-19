@@ -1,4 +1,7 @@
-# Relatório de entrega · MacacoDev — 5 Projetos Python
+# Relatório técnico da entrega inicial · MacacoDev — 5 Projetos Python
+
+Este documento registra a versão 1.0.0. A apresentação atual para estudantes está
+na [página inicial](../../README.md). Os comandos abaixo partem da pasta principal.
 
 ## 1. Resumo do trabalho realizado
 
@@ -66,7 +69,7 @@ Detalhes e execução de CI: [VALIDACAO.md](VALIDACAO.md).
 
 ## 5. Instruções de execução
 
-Baixe o ZIP da release, extraia e abra [COMECE-AQUI.md](COMECE-AQUI.md). Ou:
+Baixe o ZIP da release, extraia e abra [COMECE-AQUI.md](../../COMECE-AQUI.md). Ou:
 
 ```sh
 git clone https://github.com/PedroseleT/macacodev-5-projetos-python.git

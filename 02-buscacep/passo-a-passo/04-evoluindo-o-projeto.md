@@ -1,36 +1,39 @@
-# 4. Aprenda com os erros
+# 4. Nem toda falha é culpa do seu código
 
-## “HTTPError: 400” e CEP inexistente não são iguais
+Trabalhar com internet traz uma novidade: às vezes seu programa está certo,
+mas o serviço não responde. Precisamos aprender a distinguir essas situações.
 
-Um formato inválido pode causar HTTP 400. Oito dígitos inexistentes podem produzir
-um JSON com `erro`. Validar a entrada antes reduz o primeiro caso; interpretar o
-corpo trata o segundo. Não transforme todo HTTPError em “CEP não existe”. Um 503
-pode ser indisponibilidade do servidor.
+## O CEP não existe
 
-## “URLError” ou timeout
+Você pode digitar oito números e ainda assim não encontrar um endereço.
+O ViaCEP pode responder com `{"erro": true}`. Nesse caso, mostre “CEP não
+encontrado” e deixe a pessoa tentar outro. Não acrescente isso ao histórico.
 
-Seu código pode estar correto e a rede falhar. Confira a mensagem, tente outra
-consulta mais tarde e mantenha um tempo limite. Repetição agressiva não é solução.
-Teste a mensagem com uma exceção simulada; não derrube sua própria internet para
-reproduzir cada cenário.
+## A conexão não funcionou
 
-## “JSONDecodeError”
+Uma mensagem com `URLError` pode indicar problema na rede. Um tempo de espera
+esgotado indica que não houve resposta a tempo. Mostre algo como “Não foi possível
+consultar agora. Tente novamente mais tarde”.
 
-Um servidor intermediário pode devolver HTML em vez de JSON. `json.loads` não
-entende essa resposta. Ao depurar, observe uma pequena parte do corpo e o status;
-não assuma que qualquer resposta HTTP é um endereço. Nunca acrescente esse erro
-ao histórico como se fosse uma consulta válida.
+O programa não deve ficar fazendo pedidos sem parar. Espere uma nova escolha
+da pessoa no menu.
 
-## “KeyError: localidade”
+## Apareceu KeyError
 
-A chave está ausente ou você confundiu o nome. Use `print(type(dados), dados)` com
-um exemplo público e leia o contrato do serviço. Trocar toda chave por `.get(...,
-"")` pode esconder uma resposta incompleta. Rua vazia é permitida; cidade ausente
-precisa de erro explícito.
+Essa mensagem costuma significar que você tentou acessar uma informação que
+não está no dicionário. Confira se escreveu `localidade`, e não `cidade`,
+ao ler a resposta do ViaCEP.
 
-## Faça o erro virar teste
+Para investigar, mostre `print(endereco)` usando o exemplo público do tutorial.
+Veja quais nomes realmente chegaram. Não precisa adivinhar.
 
-Crie uma resposta pequena que reproduza a falha. Verifique que nenhuma escrita foi
-feita no histórico. Corrija a interpretação e rode todos os cenários anteriores.
-O teste não deve confiar em disponibilidade, velocidade ou atualização da base
-real do ViaCEP. Depois confira [os desafios](05-finalizacao.md).
+## A resposta não era JSON
+
+Se aparecer `JSONDecodeError`, o texto recebido não pôde ser lido como JSON.
+Não transforme qualquer resposta em endereço só para o programa continuar.
+Avise que o serviço enviou uma resposta inesperada.
+
+Leia a última linha do erro, descubra a parte envolvida e corrija uma coisa
+por vez. E lembre: uma consulta que falhou não deve apagar as anteriores.
+
+[Anterior: construir](03-primeira-implementacao.md) · [Próximo: melhorar sua versão](05-finalizacao.md)

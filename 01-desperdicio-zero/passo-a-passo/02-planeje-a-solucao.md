@@ -1,43 +1,41 @@
-# 2. Planeje a solução
+# 2. Vamos organizar as ideias
 
-Entradas: nome, quantidade, validade e opção de menu. Saídas: registro salvo,
-listagem, classificação da data ou mensagem de erro. Comece separando a regra de
-negócio da leitura do teclado: uma função que recebe valores é fácil de testar.
+Antes de programar, vamos dividir a ideia em pedaços que cabem na cabeça.
+“Fazer um gerenciador de alimentos” parece grande. “Guardar o nome de uma banana”
+já parece um começo possível, né?
 
-## Modele um registro
+## Um alimento e uma lista de alimentos
+
+Um alimento tem informações que ficam juntas. Em Python, um dicionário pode
+guardar essas informações usando nomes para cada uma:
 
 ```python
-alimento = {"id": 1, "nome": "Banana", "quantidade": 6, "validade": "2026-10-20"}
+alimento = {"nome": "Banana", "quantidade": 6}
+print(alimento["nome"])
 ```
 
-O dicionário reúne informações de um alimento; uma lista reúne vários alimentos.
-O ID é identidade, não posição: remover o primeiro item não deve mudar o ID dos
-demais. Guarde um `proximo_id` e incremente a cada cadastro.
+A saída será `Banana`. O texto `"nome"` funciona como a etiqueta de uma gaveta:
+você usa a etiqueta para encontrar o valor. Acrescentaremos a validade depois.
 
-Datas serão pedidas em DD/MM/AAAA e guardadas em AAAA-MM-DD, formato ISO. A conversão
-tem responsabilidade própria: `data_de_entrada(texto)`. Para quantidade, planeje
-`quantidade_valida(valor)`. Para classificar, `situacao(item, hoje, dias)`.
-Receber `hoje` nos testes evita depender da data real do computador.
+Para guardar vários alimentos, usaremos uma lista de dicionários. Não precisa
+decorar essa frase: pense em uma caixa com várias fichas dentro.
 
-## Organize antes de implementar
+## Nosso caminho
 
-```text
-carregar estado ou iniciar lista vazia
-enquanto opção não for sair:
-    receber opção
-    se cadastrar: validar e construir novo estado
-    se listar: percorrer registros
-    se filtrar: comparar datas
-    se remover: localizar por ID
-    se houve alteração: salvar e confirmar
-```
+1. Criar uma ficha de alimento.
+2. Colocar mais de uma ficha na lista.
+3. Mostrar as fichas na tela.
+4. Acrescentar a validade e comparar com o dia de hoje.
+5. Remover um alimento.
+6. Salvar a lista para abrir de novo depois.
 
-Por que salvar antes de confirmar? Se o disco negar acesso, “salvo com sucesso”
-seria mentira. Na referência, funções de mudança devolvem uma cópia: o menu só
-troca o estado depois de gravar. Primeiro implemente em memória; depois aprenda
-esse cuidado ao adicionar persistência.
+Cada alimento também terá um número próprio, chamado ID. Ele ajuda a escolher
+qual remover, inclusive quando dois alimentos têm o mesmo nome.
 
-Escreva assinaturas das funções e um exemplo de retorno para cada uma. Decida se
-aceitará quantidades fracionárias e como mostrará a unidade: nesta versão a unidade
-pode fazer parte do nome, como “Arroz (kg)”. Quando conseguir simular um cadastro
-sem teclado, passe à [construção](03-primeira-implementacao.md).
+Uma função será uma pequena tarefa com nome, como `cadastrar` ou `listar`.
+Não coloque tudo dentro de uma função gigante.
+
+Anote quais informações entram e o que você espera ver na tela. Comece com dois
+alimentos: é mais fácil acompanhar uma lista pequena antes de pensar em cinquenta.
+
+[Anterior: a ideia](01-entenda-o-problema.md) · [Próximo: começar o programa](03-primeira-implementacao.md)

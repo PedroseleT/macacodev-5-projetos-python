@@ -1,23 +1,35 @@
-# 5. Evolua sozinho
+# 5. Você consegue explicar quem será chamado?
 
-Faça uma simulação completa com as duas categorias, incluindo uma reinicialização
-enquanto alguém é atendido. Compare a sequência ao que você previu no papel.
-Você consegue explicar a regra sem apontar para o código? Se não, simplifique o
-exemplo até conseguir acompanhar cada transformação.
+Agora use as duas categorias juntas. Gere algumas senhas, chame uma por vez
+e conclua cada atendimento. Antes de apertar a opção de chamar, tente prever
+qual número aparecerá.
 
-Uma melhoria muda também invariantes: regras que devem continuar verdadeiras.
-Mesmo com múltiplos guichês, a senha não pode estar simultaneamente na fila e num
-guichê. Mesmo com outra política, a ordem interna da categoria deve permanecer
-explícita. Faça a mudança e escreva o teste correspondente.
+Feche o programa enquanto uma senha estiver em atendimento. Ao abrir, ela deve
+continuar ativa. Depois de concluir, a fila precisa seguir de onde parou.
 
-Escolha uma atividade de [desafios.md](../desafios.md), consulte
-[dicas.md](../dicas.md) em camadas e documente sua política com uma sequência de
-exemplo. Não prometa que uma proporção arbitrária resolve todos os requisitos de
-um atendimento real.
+## O mais importante não é decorar a condição
 
-Para apresentar no portfólio, mostre as filas antes e depois de cada chamada e o
-que é recuperado do JSON. Explique que a numeração é global e que o programa aceita
-uma única instância por arquivo. Não publique dados de pessoas atendidas.
+Você consegue explicar a regra para outra pessoa sem mostrar o código?
+“Até duas prioritárias, depois uma comum, se houver as duas categorias”
+é uma explicação mais útil do que repetir uma linha de `if`.
 
-Marque o [checklist](../checklist.md). Você está pronto para reunir cadastro,
-atualização, filtros e exportação no [Radar de Vagas](../../05-radar-de-vagas/README.md).
+Se o resultado surpreender, volte a um exemplo menor e acompanhe o contador.
+É normal precisar desenhar para entender uma sequência.
+
+## Agora escolha uma mudança
+
+Talvez você queira mostrar quantas pessoas estão esperando ou experimentar
+outra forma de alternar as categorias. As [ideias para continuar](../desafios.md)
+têm opções de tamanhos diferentes.
+
+Antes de alterar, escreva uma sequência de chegada e a ordem de chamada esperada.
+Depois compare com o que acontece no programa.
+
+Mudar a regra não significa ignorar a ordem de chegada dentro de cada categoria.
+E lembre: seguimos construindo uma ferramenta de estudo, sem prometer resolver
+todas as necessidades de um estabelecimento real.
+
+Se precisar, [abra uma ajuda](../dicas.md). Termine com [o que já aprendeu](../checklist.md).
+No próximo projeto, vamos juntar cadastros, buscas, alterações e arquivos.
+
+[Anterior: entender os enganos](04-evoluindo-o-projeto.md) · [Próximo projeto: Radar de Vagas](../../05-radar-de-vagas/README.md)

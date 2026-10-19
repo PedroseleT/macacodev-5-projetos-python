@@ -1,48 +1,43 @@
-# 3. Construa por etapas
+# 3. Hora de colocar a mão no código
 
-Abra `codigo-inicial/main.py`. O menu funciona; `tarefas.py` mostra o próximo passo.
-Crie seu módulo de regras ali. Não importe `solucao/` para completar a atividade.
+Abra a pasta `codigo-inicial` deste projeto no editor. Ela tem dois arquivos:
+`main.py` mostra o menu; `tarefas.py` guarda orientações sobre o que falta construir.
+O menu ainda não cadastra alimentos: essa parte será sua.
 
-## Atividade A: um registro em memória
+No terminal, a partir da pasta principal da trilha, rode:
 
-Objetivo: transformar entradas em um dicionário. Conceitos: parâmetros e `return`.
-Antes de usar `input`, chame sua função com nome “Banana”, quantidade 6 e uma data.
-Tarefa: rejeite nome vazio e quantidade não positiva. Esperado: uma mensagem para
-zero e um registro para 6. Teste também nome só com espaços e quantidade “duas”.
-
-## Atividade B: uma coleção
-
-Objetivo: cadastrar mais de um registro sem perder o anterior. Conceitos: lista,
-`append` e `for`. Tarefa: crie dois alimentos e liste IDs e nomes. Esperado: dois
-IDs distintos. Remova o primeiro e cadastre outro: o novo ID não pode reutilizar
-o removido. Teste remoção de ID inexistente sem alterar a lista.
-
-## Atividade C: datas
-
-Objetivo: comparar dias, não textos. Conceitos: importação e objetos de data.
-Experimente isoladamente:
-
-```python
-from datetime import date
-
-hoje = date(2026, 10, 18)
-validade = date(2026, 10, 20)
-print((validade - hoje).days)
+```sh
+python 01-desperdicio-zero/codigo-inicial/main.py
 ```
 
-Tarefa: use esse número para classificar ontem, hoje, +3 e +4 dias. Só depois faça
-a conversão do texto com `datetime.strptime`. Esperado: 31/02 produz erro tratado,
-não uma classificação. Teste fevereiro em ano bissexto.
+Se seu computador usa `python3` ou `py`, troque apenas a primeira palavra.
 
-## Atividade D: arquivos
+## Primeiro: um cadastro
 
-Objetivo: recuperar os registros após sair. Conceitos: `pathlib`, JSON e exceções.
-Experimente `json.dumps` em uma lista e `json.loads` no resultado, ainda sem disco.
-Observe que JSON é texto, enquanto o dicionário é uma estrutura em memória.
+Em `tarefas.py`, crie uma função para receber nome e quantidade e devolver um
+dicionário. Comece com valores escritos no código. Depois acrescente as perguntas
+com `input` no menu e chame sua função.
 
-Tarefa: grave em UTF-8 e leia ao iniciar. Esperado: cadastrar, sair e abrir mantém
-o item. Arquivo ausente inicia vazio; arquivo inválido mostra erro e é preservado.
-Teste em um caminho descartável, nunca no único arquivo com seus dados.
+Lembre: o que vem de `input` é texto. Para calcular com a quantidade, será
+necessário transformar esse texto em número. Se a pessoa escrever “seis”,
+mostre uma mensagem e deixe tentar novamente.
 
-Conecte as funções ao menu uma a uma. Depois de cada atividade, anote caso válido,
-caso inválido e resultado observado. Continue para [depuração](04-evoluindo-o-projeto.md).
+## Depois: mais de um alimento
+
+Crie uma lista que continue existindo enquanto o menu estiver aberto. Acrescente
+o novo alimento nela e use `for` para mostrar um de cada vez. Cadastre Banana e
+Arroz: os dois devem aparecer, sem um apagar o outro.
+
+## Agora entram as datas
+
+Use `datetime.strptime(texto, "%d/%m/%Y").date()` para transformar o texto em
+uma data. Subtrair duas datas permite descobrir quantos dias faltam.
+Uma data impossível, como 31/02, deve receber uma explicação na tela.
+
+Por último, acrescente a remoção pelo ID e salve os dados em JSON, um arquivo
+de texto organizado que Python consegue escrever e ler com o módulo `json`.
+Use `pathlib.Path` para indicar o arquivo. Ao reabrir, carregue a lista salva.
+
+Não tente terminar tudo de uma vez. Faça uma mudança, rode, observe e continue.
+
+[Anterior: organizar](02-planeje-a-solucao.md) · [Próximo: quando algo dá errado](04-evoluindo-o-projeto.md)

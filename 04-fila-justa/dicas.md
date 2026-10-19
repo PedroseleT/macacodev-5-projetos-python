@@ -1,18 +1,40 @@
-# Dicas progressivas
+# Uma ajuda para desembolar a fila
 
-<details><summary>1 · Qual lado da lista retirar?</summary>
-Desenhe três chegadas e retire a primeira no papel. Compare com o comportamento
-de pop sem argumento e pop com índice zero.
+Acompanhe poucas senhas por vez. Abra a pista da parte em que travou.
+
+<details><summary>Estou chamando a última pessoa da lista</summary>
+
+**Primeira pista:** confira de qual lado da lista você está retirando.
+
+**Mais uma:** `pop()` tira a última; `pop(0)` tira a primeira.
+Antes de usar, confira se existe alguém esperando.
+
 </details>
-<details><summary>2 · O contador fica onde?</summary>
-Uma informação usada na próxima chamada precisa sobreviver ao reinício. Ela deve
-fazer parte do estado salvo, não apenas de uma variável do menu.
+
+<details><summary>Como sei quando chegou a vez de uma comum?</summary>
+
+Guarde um contador de prioritárias chamadas seguidas. Quando chegar a duas
+e houver uma comum esperando, chame a comum e zere esse contador.
+
+Se só houver prioritárias, continue atendendo. A preferência não precisa
+segurar a fila quando não existe alguém da outra categoria.
+
 </details>
-<details><summary>3 · E quando só há uma categoria?</summary>
-A proporção só limita a preferência quando existe alguém da outra categoria.
-Desenhe a tabela: ambas, só comum, só prioritária, nenhuma.
+
+<details><summary>Por que o contador precisa ser salvo?</summary>
+
+**Primeira pista:** fechar o programa apaga as variáveis que só estavam na memória.
+
+**Mais uma:** a próxima chamada depende do que aconteceu antes. Guarde o contador
+junto das filas no JSON para não perder essa informação ao reabrir.
+
 </details>
-<details><summary>Qual a diferença entre chamar e concluir?</summary>
-Chamar move a senha para atendimento ativo. Concluir move a ativa para histórico.
-São duas ações; o total de concluídos não deve aumentar antes da segunda.
+
+<details><summary>Chamar já conta como atendimento concluído?</summary>
+
+Não. Primeiro a senha sai da espera e fica em atendimento. Só quando você
+escolhe concluir ela vai para o histórico e aumenta o total de concluídos.
+
 </details>
+
+[Voltar à etapa de construção](passo-a-passo/03-primeira-implementacao.md)
