@@ -15,7 +15,7 @@ confirmar cada ambiente.
 | Radar de Vagas | 16 testes aprovados |
 | Integração e estrutura da trilha | 11 testes aprovados |
 | Total | 79 testes, zero falhas, zero erros, zero ignorados |
-| Links relativos Markdown | 101 destinos existentes |
+| Links relativos Markdown | verificação automática sem destinos inválidos |
 | Sintaxe | compileall sem erros; ast em modo Python 3.11 |
 | Estilo | Ruff 0.17.1: check e format --check aprovados |
 | ViaCEP real, fora da suíte | uma consulta de 01001000 retornou São Paulo/SP |
@@ -57,3 +57,20 @@ internet. Testes da trilha abrem os cinco menus por subprocessos, com diretório
 de trabalho diferente e caminhos com espaços, e verificam a preservação de JSON
 corrompido e UTF-8 inválido. O parser ast também verifica sintaxe disponível em 3.11;
 isso complementa, mas não substitui executar a suíte nessa versão.
+
+## Integração contínua executada
+
+[Execução confirmada no GitHub Actions](https://github.com/PedroseleT/macacodev-5-projetos-python/actions/runs/39184586727),
+commit `046ce3b`: sete jobs concluídos com sucesso. Cada um dos seis ambientes de
+teste executou os mesmos 79 testes sem falhas:
+
+| Sistema | Python 3.11 | Python 3.13 |
+|---|---|---|
+| Ubuntu | aprovado | aprovado |
+| Windows | aprovado | aprovado |
+| macOS | aprovado | aprovado |
+
+O sétimo job verificou lint e formatação. Também foi feito clone público limpo em
+outra pasta temporária no Windows: 79 testes aprovados e links válidos sem instalar
+dependências dos aplicativos. Mudanças posteriores apenas de documentação são
+verificadas novamente pelo workflow a cada push.

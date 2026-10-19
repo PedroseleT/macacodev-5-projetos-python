@@ -11,6 +11,9 @@ para quem conhece alguns conceitos, mas trava diante de um arquivo em branco.
 
 ## [Comece por aqui →](COMECE-AQUI.md)
 
+[Baixar a versão 1.0.0 em ZIP](https://github.com/PedroseleT/macacodev-5-projetos-python/releases/download/v1.0.0/macacodev-5-projetos-python-v1.0.0.zip)
+· [Relatório de entrega](ENTREGA.md)
+
 Você terá um esqueleto executável, atividades progressivas, dicas em camadas,
 testes e uma solução de referência em cada projeto. Tente antes de consultar a
 solução; depois explique o que mudou e construa uma versão sua.
